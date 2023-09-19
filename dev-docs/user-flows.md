@@ -18,6 +18,22 @@ The interactive issue creator will output the following selectable list:
     priority:
     assignee:
     id:
+    create
+    cancel
 ```
 
-The items can be navigated by arrow keys, and by pressing `ENTER` on any of the items, the user will be prompted to set the value for that item. `tags`, `status`, `priority`, `assignee` will offer a selectable list from the default values specified in `mini-task.json`
+The items can be navigated by arrow keys, and by pressing `ENTER` on any of the items, the user will be prompted to set the value for that item. `tags`, `status`, `assignee` will offer a selectable list from the default values specified in `mini-task.json`. Selecting `create` will create the issue and output it in the console. Selecting `cancel` will cancel issue creation (the `cancel` option will only be shown in the interactive CLI, not when running the command directly)
+
+## minitask edit
+
+`minitask edit` will be similar to `minitask new`. You can pass flag args to directly update the issue, or only include the positional argument (`id`|`name`|`description`) to open the interactive editor. If multiple issues match the selector, the user will be prompted with a list to select the right issue:
+
+```
+    Issues:
+        create-api-endpoint-movies
+        update-docs
+        
+```
+
+The interactive editor will be the same as the `create` editor, except the values will be pre-filled and `create` will instead say `update`.
+
