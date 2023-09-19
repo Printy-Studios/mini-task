@@ -42,3 +42,36 @@ issues with the ability to filter and sort. It's possible to create filter/sort 
 `minitask settings --e` - Interactively view and edit user settings.
 
   - `--e` - Open the user settings file (`minitask-user.json`) in default text editor instead of interactive CLI.
+
+## File-based storage
+
+All issues are stored as Markdown files. This allows an issue to be easily viewed/edited/created without the need for the CLI. Most of the issue's data is stored as [front matter](), except for the title and description. A typical issue file will look something like this:
+
+```
+---
+
+---
+
+# Create `POST` handler for the `api/movies` endpoint
+
+We currently have `GET` set up on `api/movies`, but we would like for it to be possible to also add new movies through `POST`
+
+## Request format
+
+The request body should have the following properties: 
+
+ - `name`       - *required* - name of the movie
+ - `date`       - *required* - release date of the movie
+ - `genre`      - *required* - genre of movie
+ - `description - *optional* - description of the movie
+
+## Response format
+
+The response should return with the status code appropriate for the outcome of the call, and also return the following data:
+
+ - `message` - the message describing the status of the call, or an error message in case of an error
+```
+
+As you can see the file is a regular, readable Markdown file. At the very top you have the front matter that defines the metadata of the issue, also in a human-readable format.
+
+The program can be extended to support other file formats as well!
