@@ -47,4 +47,17 @@ After an issue has been selected for deletion, a confirmation prompt will appear
 
 ## minitask view
 
-`minitask view` allows the user to view a specific issue. Like in `delete`, `edit`, `create`, you can specify a positional argument to select an issue, and a select menu will appear if multiple issues match the selector. The output will print out a formatted issue with markdown rendering support
+`minitask view` allows the user to view a specific issue. Like in `delete`, `edit`, `create`, you can specify a positional argument to select an issue, and a select menu will appear if multiple issues match the selector. The output will print out a formatted issue with markdown rendering support:
+
+```
+create-post-handler-movies (id)
+
+Create `POST` handler for the `api/movies` endpoint
+
+We currently have `GET` set up on `api/movies`, but we would like for it to be possible to also add new movies through `POST`...
+
+status: doing
+priority: 2
+tags: tag1, tag2, tag3, tag4
+assignee: JorensM
+```

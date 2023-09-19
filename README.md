@@ -63,9 +63,7 @@ issues with the ability to filter and sort. It's possible to create filter/sort 
 
   - `--ni` - don't run command in interactive mode.
 
-`minitask view [id|name|description] --ni` - View issue, selecting by either `id`, `name` or `description`. If multiple issues match the selector, and interface appears where you can select the specific issue.
-
-  - `--ni` - don't run command in interactive mode.
+`minitask view [id|name|description]` - View issue, selecting by either `id`, `name` or `description`. If multiple issues match the selector, and interface appears where you can select the specific issue.
 
 `minitask settings --e` - Interactively view and edit user settings.
 

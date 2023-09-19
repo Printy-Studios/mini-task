@@ -8,4 +8,4 @@ This document describes the tasks that must be done for this project (ironic, is
 
 ## Add `minitask-user.json` section to README
 
-## Remove '--ni' from 'view'
+## ~~Remove '--ni' from 'view'~~
