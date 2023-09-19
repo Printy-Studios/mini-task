@@ -61,3 +61,23 @@ priority: 2
 tags: tag1, tag2, tag3, tag4
 assignee: JorensM
 ```
+
+## minitask list
+
+`mintask list` will list all of the project's issues, optionally according to filters/sort. The user can pass args such as `--name="create"` or `--!description="movie"` To filter by those values. The `!` before the arg name means that `NOT` will be applied to the search. The default regex will find matches where the given property cotains the given string, but a custom regex can be passed like so `--!description="/[a-H]/"`.
+
+`--sortby` allows the user to sort by a property, such as `--sortby=status` for descending and `--!sortby=status` for ascending
+
+A user can pass a single positional argument - `preset-name` which will mean that a preset defined in `minitask.json` will be used to filter/sort. It's possible to combine a preset with custom filter/sort options
+
+```
+    Issues
+    name: create
+    description: NOT /[a-J]/
+    sort by: status DESC
+        create-post-handler-movies
+        create-docs-folder
+        cancel
+```
+
+By default the list is interactive and you can select an issue from the list, which will take you to issue view where you can view and edit the issue. The list can also be run with `--ni` which will output the list in non-interactive mode.
