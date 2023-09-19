@@ -16,11 +16,11 @@ provide a way for small teams to manage their issues easily, without having to l
 
 `minitask` - Run the interactive CLI.
 
-`minitask new [name] --description|d|desc --status|s --priority|p --tags|-t --id` -
+`minitask new [name] --description|d|desc --status|s --priority|p --tags|-t --id --assignee` -
 Create a new issue. If no name is specified, an interactive issue creator is opened, otherwise
 a new issue is created automatically from provided args.
 
-`minitask edit [id|name|description] --name --description --status --priority --tags --id` - 
+`minitask edit [id|name|description] --name --description --status --priority --tags --id --assignee` - 
 Edit an existing issue, selecting by either `id`, `name` or `description`. If multiple
 issues match the selector, an interface appears where you can select the specific issue.
 If you pass any of the optional flags, the issue will be directly updated, otherwise
@@ -30,7 +30,7 @@ an interactive editor will be opened.
 either `id`, `name` or `description`. If multiple issues match the selector, an 
 interface appears where you can select the specific issue.
 
-`minitask list [preset-name] --ni --status --priority --tags --id --name --description --sort` - List
+`minitask list [preset-name] --ni --status --priority --tags --id --name --description --assignee --sort` - List
 issues with the ability to filter and sort. It's possible to create filter/sort presets and default filters/sort in `minitask.json`.
 
   - `--ni` - don't run command in interactive mode.
