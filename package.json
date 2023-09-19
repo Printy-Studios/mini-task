@@ -31,6 +31,7 @@
   "dependencies": {
     "@types/yargs": "^17.0.24",
     "enquirer": "^2.4.1",
+    "module-alias": "^2.2.3",
     "yargs": "^17.7.2"
   }
 }
