@@ -12,6 +12,26 @@ provide a way for small teams to manage their issues easily, without having to l
  - **...Extensible** - to counter its simplicity, mini-task is designed to be vastly
  extensible
 
+## Setup
+
+To use **mini-task**, you first need to install it either **globally** or into your project
+
+**globally**:
+```
+npm i -g mini-task
+```
+
+**project**:
+```
+npm i mini-task
+```
+
+Next, you have to create a new mini-task project. This can be done by running `minitask init` or by creating a `minitask.json` file and populating it with options (see [minitask.json]() for list of options).
+
+`minitask init` will run you through an interactive questionnaire to help you set up your project. If you want to skip the questionnaire and just initialize a project with the default settings, run `minitask init -y`.
+
+Now you have your mini-task project set up, you can start creating issues. See the sections below on how to do that
+
 ## Commands
 
 `minitask` - Run the interactive CLI.
