@@ -1,7 +1,6 @@
 # mini-task
 **mini-task** is a file based issue tracker CLI. The intent of this program is to
-provide a way for small teams to manage their issues easily, without having to leave
-their project's environment.
+provide a way for small teams to manage their issues easily, without having to leave their project's environment.
 
 **Features:**
 
@@ -20,3 +19,9 @@ their project's environment.
 `minitask new [name] --description|d|desc --status|s --priority|p --tags|-t --id` -
 Create a new issue. If no name is specified, an interactive issue creator is opened, otherwise
 a new issue is created automatically from provided args
+
+`minitask edit [id|name|description] --name --description --status --priority --tags --id` - 
+Edit an existing issue, selecting by either `id`, `name` or `description`. If multiple
+issues match the selector, an interface appears where you can select the specific issue.
+If you pass any of the optional flags, the issue will be directly updated, otherwise
+an interactive editor will be opened. 
