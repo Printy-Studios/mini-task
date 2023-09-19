@@ -119,7 +119,7 @@ A typical `mini-task.json` file looks like this
 {
     "issues-path": "./issues"
     "markdown-style": {
-        ""
+        "em": "chalk.italic"
     }
 }
 ```
