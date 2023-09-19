@@ -58,7 +58,7 @@ an interactive editor will be opened.
 either `id`, `name` or `description`. If multiple issues match the selector, an 
 interface appears where you can select the specific issue.
 
-`minitask list [preset-name] --ni --status --priority --tags --id --name --description --assignee --sort` - List
+`minitask list [preset-name] --ni --status --priority --tags --id --name --description --assignee --sortby --sortorder` - List
 issues with the ability to filter and sort. It's possible to create filter/sort presets and default filters/sort in `minitask.json`.
 
   - `--ni` - don't run command in interactive mode.
@@ -120,7 +120,37 @@ A typical `mini-task.json` file looks like this
     "issues-path": "./issues"
     "markdown-style": {
         "em": "chalk.italic"
-    }
+    },
+    "tags": {
+      "bug": "chalk.red",
+      "feature": "chalk.yellow",
+      "improvement": "chalk.blue",
+      "api": "chalk.white",
+      "movies": "chalk.white",
+      "design": "chalk.white"
+    },
+    "statuses": {
+      "backlog": "chalk.gray",
+      "todo": "chalk.white",
+      "done": "chalk.green",
+      "doing": "chalk.yellow"
+    },
+    "assignees": [
+      "JorensM",
+      "John Doe"
+    ],
+    "list-presets": [
+      "backlog": {
+        "status": "backlog"
+        "sortby": "priority"
+        "sortorder": "desc"
+      }
+      "movies": {
+        "status": "todo",
+        "sortby": "priority",
+        "sortorder: "desc"
+      }
+    ]
 }
 ```
 
@@ -128,3 +158,22 @@ A typical `mini-task.json` file looks like this
 
  - `issues-path`    - **required** - defines the path for the folder where the issue files will be stored
  - `markdown-style` - *optional*   - defines the styles for the markdown renderer when viewing issues. See [markded-terminal](https://www.npmjs.com/package/marked-terminal#options) for a list of options
+ - `tags` - defines the tags to be used when creating/editing issues. Should be formatted like so:
+   - ```
+     "tags": {
+      "name": "color"
+      "name": "color"
+     }
+     ```
+ - `statuses` - defines the statuses to be used when creating/editing issues. Follows same format as `tags`
+ - `assignees` - defines the possible assignees to an issue, should be an array of names
+ - `list-presets` - defines the presets for when using `minitask list`. Should follow the following format:
+   - ```
+     "list-presets": {
+       "preset-name": {
+         "arg1": "value",
+         "arg2": "value"
+       } 
+     }
+     ```
+     Where `arg#` is the name of the `list` command's arg
