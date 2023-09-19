@@ -4,7 +4,7 @@ This document describes the user flows present when using mini-task. The purpose
 
 ## minitask new
 
-`minitask new` lets the user create a new issue. The command can be passed an optional positional `name` argument and optional flag args such as `--description`, `--tags` etc. If the `name` parameter is specifed, the task gets created directly according to the passed arguments. If the `name` parameter is not specified, an interactive issue creator is launched in the console.
+`minitask new` lets the user create a new issue. The command can be passed an optional positional `name` argument and optional flag args such as `--description`, `--tags` etc. If the `name` parameter is specifed, the task gets created directly according to the passed arguments. If the `name` parameter is not specified, an interactive issue creator is launched in the console. After creating the task, it will be output to the console
 
 ### Interactive issue creator
 
@@ -29,11 +29,18 @@ The items can be navigated by arrow keys, and by pressing `ENTER` on any of the 
 `minitask edit` will be similar to `minitask new`. You can pass flag args to directly update the issue, or only include the positional argument (`id`|`name`|`description`) to open the interactive editor. If multiple issues match the selector, the user will be prompted with a list to select the right issue:
 
 ```
-    Issues:
+    Select issue:
         create-api-endpoint-movies
-        update-docs
-        
+        create-docs-folder
+        cancel
 ```
+
+Selecting `cancel` will cancel the action
 
 The interactive editor will be the same as the `create` editor, except the values will be pre-filled and `create` will instead say `update`.
 
+## minitask delete
+
+`minitask delete` allows the user to delete an issue. It has a single required positional argument where you must specify one of the following - `id`|`name`|`description`. If there are multiple issues that match the selector, a selectable list of issues will be shown, just like with `minitask edit`.
+
+After an issue has been selected for deletion, a confirmation prompt will appear for the user to confirm deletion.
