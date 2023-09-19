@@ -81,3 +81,57 @@ A user can pass a single positional argument - `preset-name` which will mean tha
 ```
 
 By default the list is interactive and you can select an issue from the list, which will take you to issue view where you can view and edit the issue. The list can also be run with `--ni` which will output the list in non-interactive mode.
+
+## Interactive CLI
+
+Apart from running commands separately, you can use the interactive CLI by running `minitask` which will start minitask in interactive mode. In this mode, the following menu will be shown:
+
+```
+Minitask
+    New issue
+    List issues
+```
+
+The `New issue` option will take you to the `minitask new` prompt.
+
+The `List issues` will take you to a menu where you can customize filters/sorting
+
+```
+List issues
+    View
+    Back
+    Presets:
+        backlog
+        movies
+        api
+    Filters:
+        name:
+        description:
+        status:
+        tags: tag1, tag2
+        priority: 2
+        assignee:
+    Sort by:
+        name
+        **description**
+        status
+        tags
+        priority
+        assignee
+    Sort order: 
+        **DESC**
+        ASC
+    Clear
+```
+
+The `Filters` submenu allows you to apply filters to provided properties. Selecting a property will take you to a prompt where you must enter the value for that filter.
+
+The `Sort by` submenu allows you to select a single property by which to sort, and `Sort order` submenu allows you to select the sort order
+
+The `Presets` submenu allows you to select presets to apply to the list
+
+The `Back` option takes you back to the main menu. The selected options should be preserverd
+
+The `Clear` option clears the filters/presets/sort
+
+The `View` option will show you the list in the same fashion that `minitask list` does, except that there will be a `back` option that takes you back to filters screen
