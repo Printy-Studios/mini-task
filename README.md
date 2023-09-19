@@ -108,3 +108,23 @@ The response should return with the status code appropriate for the outcome of t
 As you can see the file is a regular, readable Markdown file. At the very top you have the front matter that defines the metadata of the issue, also in a human-readable format.
 
 mini-task can be extended to support other file formats as well!
+
+## mini-task.json
+
+The `mini-task.json` file specifies the settings for the project scope.
+
+A typical `mini-task.json` file looks like this
+
+```
+{
+    "issues-path": "./issues"
+    "markdown-style": {
+        ""
+    }
+}
+```
+
+### Properties
+
+ - `issues-path`    - **required** - defines the path for the folder where the issue files will be stored
+ - `markdown-style` - *optional*   - defines the styles for the markdown renderer when viewing issues. See [markded-terminal](https://www.npmjs.com/package/marked-terminal#options) for a list of options
