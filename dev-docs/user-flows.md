@@ -70,6 +70,8 @@ assignee: JorensM
 
 A user can pass a single positional argument - `preset-name` which will mean that a preset defined in `minitask.json` will be used to filter/sort. It's possible to combine a preset with custom filter/sort options
 
+Passing `--ni` will output the list non-interactively
+
 ```
     Issues
     name: create
