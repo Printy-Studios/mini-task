@@ -1,7 +1,7 @@
 # mini-task
 **mini-task** is a file based issue tracker CLI. The intent of this program is to
 provide a way for small teams to manage their issues easily, without having to leave
-their project environment.
+their project's environment.
 
 **Features:**
 
