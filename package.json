@@ -1,5 +1,5 @@
 {
-  "name": "mini-task",
+  "name": "minitask",
   "version": "0.0.1",
   "description": "File based issue tracker CLI",
   "main": "dist/index.js",
