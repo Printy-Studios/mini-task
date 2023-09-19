@@ -23,5 +23,14 @@
   "bugs": {
     "url": "https://github.com/Printy-Studios/mini-task/issues"
   },
-  "homepage": "https://github.com/Printy-Studios/mini-task#readme"
+  "homepage": "https://github.com/Printy-Studios/mini-task#readme",
+  "devDependencies": {
+    "@types/node": "^20.6.2",
+    "typescript": "^5.2.2"
+  },
+  "dependencies": {
+    "@types/yargs": "^17.0.24",
+    "enquirer": "^2.4.1",
+    "yargs": "^17.7.2"
+  }
 }
