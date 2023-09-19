@@ -24,4 +24,8 @@ a new issue is created automatically from provided args
 Edit an existing issue, selecting by either `id`, `name` or `description`. If multiple
 issues match the selector, an interface appears where you can select the specific issue.
 If you pass any of the optional flags, the issue will be directly updated, otherwise
-an interactive editor will be opened. 
+an interactive editor will be opened.
+
+`minitask delete [id|name|description]` - Delete an existing issue, selecting by
+either `id`, `name` or `description`. If multiple issues match the selector, an 
+interface appears where you can select the specific issue.
