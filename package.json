@@ -4,11 +4,16 @@
   "description": "File based issue tracker CLI",
   "main": "dist/index.js",
   "scripts": {
+    "minitask": "tsc && node dist/bin/minitask.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Printy-Studios/mini-task.git"
+  },
+  "_moduleAliases": {
+    "bin_handlers": "./dist/bin_handlers",
+    "bin": "./dist/bin"
   },
   "keywords": [
     "issue",
