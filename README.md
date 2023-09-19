@@ -31,6 +31,10 @@ either `id`, `name` or `description`. If multiple issues match the selector, an
 interface appears where you can select the specific issue.
 
 `minitask list [preset-name] --ni --status --priority --tags --id --name --description --sort` - List
-tasks with the ability to filter and sort. It's possible to create filter/sort presets and default filters/sort in `minitask.json`.
+issues with the ability to filter and sort. It's possible to create filter/sort presets and default filters/sort in `minitask.json`.
 
-  - `--ni` - don't run list in interactive mode.
+  - `--ni` - don't run command in interactive mode.
+
+`minitask view [id|name|description] --ni` - View issue, selecting by either `id`, `name` or `description`. If multiple issues match the selector, and interface appears where you can select the specific issue.
+
+  - `--ni` - don't run command in interactive mode
