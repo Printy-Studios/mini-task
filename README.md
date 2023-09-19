@@ -32,9 +32,17 @@ Next, you have to create a new mini-task project. This can be done by running `m
 
 Now you have your mini-task project set up, you can start creating issues. See the sections below on how to do that
 
+## Using the CLI
+
+mini-task has two ways how you can use it - with an interactive CLI or through direct commands. If you want to use the interactive CLI, simply run `minitask`, otherwise see the [Commands section](#commands) to see how to run individual commands.
+
+mini-task uses [marked-terminal](https://www.npmjs.com/package/marked-terminal) for rendering the markdown of the issue descriptions. You can alter the style of the rendered markdown through user settings by using `minitask settings` or editing the `minitask-user.json` file.
+
 ## Commands
 
 `minitask` - Run the interactive CLI.
+
+`minitask init --y` - Initialize a new mini-task project by answering a few questions. `--y` to skip the questions and initialize with default settings.
 
 `minitask new [name] --description|d|desc --status|s --priority|p --tags|-t --id --assignee` -
 Create a new issue. If no name is specified, an interactive issue creator is opened, otherwise
@@ -65,10 +73,15 @@ issues with the ability to filter and sort. It's possible to create filter/sort 
 
 ## File-based storage
 
-All issues are stored as Markdown files. This allows an issue to be easily viewed/edited/created without the need for the CLI. Most of the issue's data is stored as [front matter](), except for the title and description. A typical issue file will look something like this:
+All issues are stored as Markdown files. This allows an issue to be easily viewed/edited/created without the need for the CLI. Most of the issue's data is stored as [front matter](https://daily-dev-tips.com/posts/what-exactly-is-frontmatter/?utm_content=cmp-true), except for the title and description. A typical issue file will look something like this:
 
 ```
 ---
+
+status: 'doing'
+priority: 2
+tags: [ "api", "movies" ]
+assignee: "JorensM"
 
 ---
 
@@ -94,4 +107,4 @@ The response should return with the status code appropriate for the outcome of t
 
 As you can see the file is a regular, readable Markdown file. At the very top you have the front matter that defines the metadata of the issue, also in a human-readable format.
 
-The program can be extended to support other file formats as well!
+mini-task can be extended to support other file formats as well!
