@@ -1,5 +1,17 @@
 # mini-task
-File based issue tracker CLI
+**mini-task** is a file based issue tracker CLI. The intent of this program is to
+provide a way for small teams to manage their issues easily, without having to leave
+their project environment.
+
+**Features:**
+
+ - **File based** - all issues are stored as human-readable markdown files and
+ can be edited/viewed without the CLI
+ - **CLI** - the CLI can be used to quickly browse tasks, view, edit, create, delete them.
+ - **Lightweight** - mini-task was intended to be light and fast from the very start.
+ It offers only the basic functions needed to manage issues. But if you want something more...
+ - **...Extensible** - to counter its simplicity, mini-task is designed to be vastly
+ extensible
 
 ## Commands
 
