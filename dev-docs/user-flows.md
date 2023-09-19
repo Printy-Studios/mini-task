@@ -44,3 +44,7 @@ The interactive editor will be the same as the `create` editor, except the value
 `minitask delete` allows the user to delete an issue. It has a single required positional argument where you must specify one of the following - `id`|`name`|`description`. If there are multiple issues that match the selector, a selectable list of issues will be shown, just like with `minitask edit`.
 
 After an issue has been selected for deletion, a confirmation prompt will appear for the user to confirm deletion.
+
+## minitask view
+
+`minitask view` allows the user to view a specific issue. Like in `delete`, `edit`, `create`, you can specify a positional argument to select an issue, and a select menu will appear if multiple issues match the selector. The output will print out a formatted issue with markdown rendering support

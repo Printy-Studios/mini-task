@@ -5,3 +5,7 @@ This document describes the tasks that must be done for this project (ironic, is
 ## Create a nested string property selector > object resolver 
 
 [See this](https://stackoverflow.com/a/22129960/1673694). This is necessary for the markdown renderer settings where you must pass `chalk`'s properties
+
+## Add `minitask-user.json` section to README
+
+## Remove '--ni' from 'view'
