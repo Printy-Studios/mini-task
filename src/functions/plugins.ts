@@ -1,18 +1,20 @@
 import * as fs from 'fs'
 import * as path from 'path'
+import log from './log'
 import { SaveIssueToFileFunction, PluginFunctions, PluginModule } from 'types/Plugin'
 
 const plugins_dir = path.join(__dirname, '../../plugins')
 
 type PluginMetadata = {
     id: string,
-    plugin_path: string
+    plugin_path: string,
+    enabled: boolean,
     functions?: PluginFunctions
 }
 
 /**
  * Checks if given object has the specified keys
- * WARNING: this returns and array or true (so a truthy value in both cases).
+ * **WARNING:** this returns and array or true (so a truthy value in both cases).
  * If you want to check if there are any missing keys, check if the type of the return
  * value is an object
  * @param {object}   obj   object to check
@@ -50,7 +52,8 @@ const parsePluginIndex = (plugin_folder_path: string): PluginMetadata => {
     }
 
     const required_keys = [
-        'id'
+        'id',
+        'enabled'
     ]
     
     const missing_keys = hasKeys(metadata, required_keys)
@@ -92,9 +95,13 @@ class PluginManager {
     }
 
     loadFunctions = async () => {
-        console.log('Loading plugin functions')
+        log('Loading plugin functions')
         for (const plugin_id in this.plugins) {
             const current_plugin = this.plugins[plugin_id]
+            if (!current_plugin.enabled) {
+                log(`Plugin ${current_plugin.id} is disabled, skipping`)
+                continue
+            }
             const current_plugin_functions = current_plugin.functions
             if (current_plugin_functions) {
                 let plugin_module: PluginModule
@@ -115,11 +122,4 @@ class PluginManager {
     }
 }
 
-console.log('export running')
-
-const plugins = new PluginManager()
-plugins.loadFunctions()
-
-global.minitask_plugins = plugins
-
-// export default plugins
+export default PluginManager

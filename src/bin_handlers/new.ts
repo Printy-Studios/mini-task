@@ -1,13 +1,17 @@
+//Core
 import * as fs from 'fs'
 import * as path from 'path'
+
+//Functions
+import log from 'functions/log'
 
 //Types
 import { Issue } from 'types/Issue'
 
-import 'functions/plugins'
+import PluginManager from 'functions/plugins'
 
-console.log('checking global')
-console.log(global.minitask_plugins)
+const plugins = new PluginManager()
+
 
 export const command = 'new [name]'
 
@@ -94,8 +98,10 @@ const getConfigFromFile = () => {
     }
 }
 
-export const handler = (argv: args) => {
-    console.log(argv)
+export const handler = async (argv: args) => {
+    log(argv)
+
+    await plugins.loadFunctions()
 
     if (!argv.name) {
         console.log('No name specified, running minitask in interactive mode(TODO)')
@@ -116,7 +122,11 @@ export const handler = (argv: args) => {
         return
     }
 
-    saveIssueToFile(config['issues-path'], new_issue)
+    if (plugins.functions.saveIssueToFile) {
+        plugins.functions.saveIssueToFile(config['issues-path'], new_issue)
+    } else {
+        saveIssueToFile(config['issues-path'], new_issue)
+    }
 
     console.log('created new issue!')
 
