@@ -1,0 +1,6 @@
+{
+    "id": "txt-format",
+    "functions": [
+        "saveIssueToFile"
+    ]
+}

@@ -1,23 +1,16 @@
 import * as fs from 'fs'
 import * as path from 'path'
 
+//Types
+import { Issue } from 'types/Issue'
+
+import 'functions/plugins'
+
 export const command = 'new [name]'
 
 type args = Omit<Issue, 'name'> & {
     name?: string,
     id?: string
-}
-
-type Issue = {
-    name: string,
-    description?: string,
-    metadata: IssueMetadata
-}
-
-type IssueMetadata = {
-    id: string,
-    priority?: number,
-    status?: string
 }
 
 type MinitaskConfig = {
@@ -38,10 +31,10 @@ const saveIssueToFile = async (_path: string, issue: Issue) => {
         output_str += field + ': ' + issue.metadata[field] + '\n'
     }
 
-    output_str += '\n---\n\n'
+    output_str += '\n---\n'
 
     //Add title
-    output_str += '# ' + issue.name + '\n'
+    output_str += '### ' + issue.name + '\n'
 
     //Add description
     output_str += issue.description || ''
@@ -58,7 +51,7 @@ const saveIssueToFile = async (_path: string, issue: Issue) => {
  * @returns 
  */
 const findFileUp = (filename: string, start_dir: string, limit = 5) => {
-    let current_dir = start_dir || process.env.INIT_CWD
+    let current_dir = (start_dir || process.env.INIT_CWD)!
 
     let times_tried = 0
 

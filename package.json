@@ -12,8 +12,9 @@
     "url": "git+https://github.com/Printy-Studios/mini-task.git"
   },
   "_moduleAliases": {
-    "bin_handlers": "./dist/bin_handlers",
-    "bin": "./dist/bin"
+    "bin_handlers": "./dist/src/bin_handlers",
+    "bin": "./dist/src/bin",
+    "functions": "./dist/src/functions"
   },
   "keywords": [
     "issue",
