@@ -4,7 +4,10 @@ import * as path from 'path'
 //Types
 import { Issue } from 'types/Issue'
 
-import plugins from 'functions/plugins'
+import 'functions/plugins'
+
+console.log('checking global')
+console.log(global.minitask_plugins)
 
 export const command = 'new [name]'
 

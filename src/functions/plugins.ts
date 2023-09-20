@@ -1,13 +1,13 @@
 import * as fs from 'fs'
 import * as path from 'path'
-import { SaveIssueToFileFunction, PluginFunctions } from 'types/PluginFunctions'
+import { SaveIssueToFileFunction, PluginFunctions, PluginModule } from 'types/Plugin'
 
 const plugins_dir = path.join(__dirname, '../../plugins')
 
 type PluginMetadata = {
     id: string,
     plugin_path: string
-    functions?: string
+    functions?: PluginFunctions
 }
 
 /**
@@ -66,12 +66,15 @@ const parsePluginIndex = (plugin_folder_path: string): PluginMetadata => {
 
 
 class PluginManager {
-    plugins: PluginMetadata[] = []
+    plugins: {
+        [plugin_id: string]: PluginMetadata   
+    } = {}
+    functions: PluginFunctions = {}
     functions_loaded: boolean = false
 
     constructor() {
 
-        console.log('constructing plugin manager')
+        //console.log('constructing plugin manager')
 
         const plugin_folder_names = fs.readdirSync(plugins_dir)
 
@@ -88,11 +91,35 @@ class PluginManager {
         return this.plugins[plugin_id]
     }
 
-    loadFunctions = () => {
-
+    loadFunctions = async () => {
+        console.log('Loading plugin functions')
+        for (const plugin_id in this.plugins) {
+            const current_plugin = this.plugins[plugin_id]
+            const current_plugin_functions = current_plugin.functions
+            if (current_plugin_functions) {
+                let plugin_module: PluginModule
+                try {
+                    plugin_module = await import(path.join(current_plugin.plugin_path, 'index.js'))
+                } catch (err) {
+                    throw new Error('An error occured while loading plugin ' + current_plugin.id + ': ' + err)
+                }
+                for(const plugin_function_name in current_plugin_functions) {
+                    if(!plugin_module[plugin_function_name]) {
+                        console.warn(`In plugin ${current_plugin.id}: function ${ plugin_function_name } that is defined in index.json is not being exported in index.js|ts`)
+                    } else {
+                        this.functions[plugin_function_name] = plugin_module[plugin_function_name]
+                    }
+                }
+            }
+        }
     }
 }
 
-const plugins = new PluginManager()
+console.log('export running')
 
-export default plugins
+const plugins = new PluginManager()
+plugins.loadFunctions()
+
+global.minitask_plugins = plugins
+
+// export default plugins
