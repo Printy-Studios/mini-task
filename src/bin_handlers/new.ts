@@ -4,7 +4,7 @@ import * as path from 'path'
 //Types
 import { Issue } from 'types/Issue'
 
-import 'functions/plugins'
+import plugins from 'functions/plugins'
 
 export const command = 'new [name]'
 
@@ -31,10 +31,10 @@ const saveIssueToFile = async (_path: string, issue: Issue) => {
         output_str += field + ': ' + issue.metadata[field] + '\n'
     }
 
-    output_str += '\n---\n'
+    output_str += '\n---\n\n'
 
     //Add title
-    output_str += '### ' + issue.name + '\n'
+    output_str += '# ' + issue.name + '\n'
 
     //Add description
     output_str += issue.description || ''

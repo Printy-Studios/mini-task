@@ -50,8 +50,7 @@ const parsePluginIndex = (plugin_folder_path: string): PluginMetadata => {
     }
 
     const required_keys = [
-        'id',
-        'plugin_path'
+        'id'
     ]
     
     const missing_keys = hasKeys(metadata, required_keys)
@@ -59,6 +58,8 @@ const parsePluginIndex = (plugin_folder_path: string): PluginMetadata => {
     if (typeof missing_keys === 'object') {
         throw new Error('The following properties are missing from ' + index_json_path + ': ' + missing_keys)
     }
+
+    metadata.plugin_path = plugin_folder_path
 
     return metadata
 }
@@ -75,7 +76,7 @@ class PluginManager {
         const plugin_folder_names = fs.readdirSync(plugins_dir)
 
         for (const plugin_folder_name of plugin_folder_names) {
-            const metadata = parsePluginIndex(plugin_folder_name)
+            const metadata = parsePluginIndex(path.join(plugins_dir, plugin_folder_name))
             if((metadata.id in this.plugins)) {
                 throw new Error('Plugin id clash for ' + metadata.id)
             }
@@ -91,8 +92,6 @@ class PluginManager {
 
     }
 }
-
-console.log('inside export')
 
 const plugins = new PluginManager()
 
