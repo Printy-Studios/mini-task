@@ -4,4 +4,4 @@ id: test-id
 
 ===
 
-function toUpperCase() { [native code] }
+AA
