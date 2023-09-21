@@ -24,3 +24,5 @@ export async function saveIssueToFile (_path: string, issue: Issue) {
 
     fs.writeFileSync(path.join(_path, issue.metadata.id + '.txt'), output_str)
 }
+
+export const issue_file_ext = 'txt'

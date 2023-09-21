@@ -4,6 +4,7 @@ import * as path from 'path'
 
 //Functions
 import log from 'functions/log'
+import getConfigFromFile from 'functions/getConfigFromFile'
 
 //Util
 import findFileUp from 'utils/findFileUp'
@@ -11,6 +12,7 @@ import findFileUp from 'utils/findFileUp'
 //Types
 import { Issue } from 'types/Issue'
 import { SaveIssueToFileFunction } from 'types/Plugin'
+import { MinitaskConfig } from 'types/Config'
 
 import PluginManager from 'functions/plugins'
 
@@ -25,9 +27,7 @@ type args = Omit<Issue, 'name'> & {
     id?: string
 }
 
-type MinitaskConfig = {
-    "issues-path": string
-}
+
 
 const slugify = (str: string) => {
     return str.replace(/\s+/g, '-').toLowerCase();
@@ -57,20 +57,7 @@ const saveIssueToFile: SaveIssueToFileFunction = async (_path: string, issue: Is
 
 
 
-const getConfigFromFile = () => {
-    const config_file = findFileUp('minitask.json', process.env.INIT_CWD, true, 5)
 
-    
-
-    if (config_file) {
-        const config: MinitaskConfig = JSON.parse(config_file.str)
-        config['issues-path'] = path.join(config_file.path, config['issues-path'])
-        return config
-    } else {
-        return null
-        //throw new Error('Could not find minitask.json')
-    }
-}
 
 export const handler = async (argv: args) => {
     log(argv)

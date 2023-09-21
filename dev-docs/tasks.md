@@ -2,6 +2,8 @@
 
 This document describes the tasks that must be done for this project (ironic, isn't it?)
 
+## PluginManager - load constants
+
 ## Add and use 'copyfiles' and 'cleardir' packages for when building the TS
 
 ## Try to make the 'new' command handler extensible

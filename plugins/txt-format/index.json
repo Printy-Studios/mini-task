@@ -3,5 +3,8 @@
     "enabled": false,
     "functions": [
         "saveIssueToFile"
-    ]
+    ],
+    "constants": {
+        "issue_file_ext": "txt"
+    }
 }
