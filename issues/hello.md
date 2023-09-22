@@ -1,7 +1,7 @@
 ---
 
 id: hello
-
+status: done
 ---
 # aaa
 
