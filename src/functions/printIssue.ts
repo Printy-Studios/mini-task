@@ -32,7 +32,9 @@ const printIssueStatus = (status: IssueStatus) => {
 }
 
 const printIssuePriority = (priority: IssuePriority) => {
-    
+    const str = (priority ? priority.label || priority.value : '-')
+
+    console.log("Priority: " + conditionalBg(priority?.bgColor)(conditionalColor(priority?.color)(str)))
 }
 
 export default function printIssue(issue: Issue, renderers: IssueRenderers) {
