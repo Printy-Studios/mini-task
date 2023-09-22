@@ -1,6 +1,13 @@
-import { IssueRenderers } from 'types/Plugin'
-import { Issue } from 'types/Issue'
+//Core
 import * as chalk from 'chalk'
+
+//Types
+import { IssueRenderers } from 'types/Plugin'
+import { 
+    Issue, 
+    IssuePriority, 
+    IssueStatus 
+} from 'types/Issue'
 
 const printIssueID = (id: string) => {
     console.log(chalk.italic.whiteBright(id))
