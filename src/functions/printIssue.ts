@@ -42,5 +42,8 @@ export default function printIssue(issue: Issue, renderers: IssueRenderers) {
     console.log('')
     printIssueName(issue.name) //Pluggable
     console.log('')
+    printIssueStatus(issue.metadata.status)
+    printIssuePriority(issue.metadata.priority)
+    console.log('')
     renderers.description(issue.description)
 }
