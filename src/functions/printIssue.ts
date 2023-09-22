@@ -26,7 +26,9 @@ const printIssueName = (name: string) => {
 }
 
 const printIssueStatus = (status: IssueStatus) => {
-
+    const str = (status ? status.label || status.value : '-')
+    
+    console.log("Status: " + conditionalBg(status?.bgColor)(conditionalColor(status?.color)(str)))
 }
 
 const printIssuePriority = (priority: IssuePriority) => {
