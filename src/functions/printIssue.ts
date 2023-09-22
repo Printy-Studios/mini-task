@@ -9,6 +9,14 @@ import {
     IssueStatus 
 } from 'types/Issue'
 
+//const conditionalBg = (color: string | undefined | null) => color ? chalk.bgHex(color) : chalk
+//const conditionalColor = (color: string | undefined | null) => color ? chalk.Color : chalk
+
+const conditionalChalk = <T,>(value: T, chalkBuilder: (value: T) => chalk.Chalk): chalk.Chalk => 
+    value ? chalkBuilder.call(chalk, value) : chalk
+const conditionalBg = (color: string | undefined | null) => conditionalChalk<string>(color, chalk.bgHex)
+const conditionalColor = (color: string | undefined | null) => conditionalChalk<string>(color, chalk.hex)
+
 const printIssueID = (id: string) => {
     console.log(chalk.italic.whiteBright(id))
 }
