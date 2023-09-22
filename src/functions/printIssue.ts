@@ -17,15 +17,13 @@ const printIssueName = (name: string) => {
     console.log(chalk.yellow.underline.bold(name))
 }
 
-const printIssueStatus = (status: string) => {
+const printIssueStatus = (status: IssueStatus) => {
 
 }
 
-const printIssuePriority = (priority: number | string) => {
+const printIssuePriority = (priority: IssuePriority) => {
     
 }
-
-
 
 export default function printIssue(issue: Issue, renderers: IssueRenderers) {
     printIssueID(issue.metadata.id) //Pluggable
