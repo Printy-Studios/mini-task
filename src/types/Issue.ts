@@ -1,11 +1,15 @@
 export type IssuePriority = {
     value: number | string,
-    label?: string
+    label?: string,
+    color?: string,
+    bgColor?: string
 }
 
 export type IssueStatus = {
     value: number | string,
-    label?: string
+    label?: string,
+    color?: string,
+    bgColor?: string
 }
 
 export type Issue = {
