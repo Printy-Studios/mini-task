@@ -9,3 +9,7 @@ export type PluginFunctions = {
 }
 
 export type PluginModule = PluginFunctions
+
+export type IssueRenderers = {
+    description: (description: string) => void
+}

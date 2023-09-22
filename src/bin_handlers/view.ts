@@ -7,7 +7,8 @@ import printIssue from 'functions/printIssue'
 import PluginManager from 'functions/plugins'
 import getIssueFromFile from 'functions/getIssueFromFile'
 
-
+//Types
+import { IssueRenderers } from 'types/Plugin'
 
 const printIssueDescription = (description: string) => {
     console.log(description)
@@ -17,10 +18,6 @@ export const command = 'view [selector]' //Currently only supports ID selector
 
 type Args = {
     selector: string
-}
-
-type IssueRenderers = {
-    description: (description: string) => void
 }
 
 export const handler = async (argv: Args) => {
