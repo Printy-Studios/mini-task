@@ -15,4 +15,8 @@ It should be possible to define priority as strings as well as numbers. In `mini
     }
 ```
 
-The sort order should be equal to the order of the priorities as they have been defined. So in the example above, the highest priority will be `urgent` and lowest will be `low`, and when sorted, they will be sorted appropriately, in accordance to the order how they were defined in `minitask.json` 
+The sort order should be equal to the order of the priorities as they have been defined. So in the example above, the highest priority will be `urgent` and lowest will be `low`, and when sorted, they will be sorted appropriately, in accordance to the order how they were defined in `minitask.json`
+
+## Status/priority schema
+
+The status and priority should be defined as an object with properties `value` and `label`. The value corresponds to the value that you use when referring to the status/priority programmatically or in the file front matter, and the label is how it should be presented for example when printing the issue. This should also be definable in `minitask.json`
