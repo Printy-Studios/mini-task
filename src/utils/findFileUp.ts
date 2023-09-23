@@ -18,7 +18,6 @@ export default function findFileUp(filename: string, start_dir: string, return_c
         var list = fs.readdirSync(current_dir)
 
         const found = list.indexOf(filename) != -1
-        console.log('looking in ' + current_dir)
         if (found) { 
             return {
                 str: return_contents ? fs.readFileSync(path.join(current_dir, filename), {encoding: 'utf-8'}) : null,

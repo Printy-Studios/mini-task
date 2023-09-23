@@ -47,10 +47,6 @@ export default function getConfigFromFile() {
             throw new Error('Invalid minitask.json: ' + err_message)
         }
 
-        //log('Validation result:', response)
-
-        //log(config)
-
         config['issues-path'] = path.join(config_file.path, config['issues-path'])
         return config
     } else {

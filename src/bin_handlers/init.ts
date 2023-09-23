@@ -2,6 +2,8 @@ import * as fs from 'fs'
 import * as path from 'path'
 import findFileUp from 'utils/findFileUp'
 
+import log from 'functions/log'
+
 export const command = 'init'
 
 /**
@@ -34,14 +36,9 @@ const findLocalNodeModulesFolder = (search_from_path: string) => {
 }
 
 export const handler = (argv) => {
-
-    //console.log(process.env)
-
-    console.log(argv)
+    log(argv)
 
     const node_modules_path = findLocalNodeModulesFolder(process.env.INIT_CWD)
-
-    console.log(node_modules_path)
 
     if (argv.u) {
         //initForUser(process.env.ProgramFiles, true)

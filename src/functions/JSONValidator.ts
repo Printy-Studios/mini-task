@@ -21,7 +21,6 @@ export default class JSONValidator {
     validateSingle(entry: any, schema_entry: JSONSchemaEntry): JSONSchemaEntryResponse {
         const err_response: JSONSchemaEntryResponse[] = []
 
-        console.log(schema_entry)
         if (!schema_entry) {
             return JSONSchemaEntryResponse.UNSPECIFIED
             //err_response.push()
@@ -62,7 +61,6 @@ export default class JSONValidator {
 
         for(const key in obj){
             const validation_response = this.validateSingle(obj[key], schema[key])
-            console.log(validation_response)
             if (validation_response !== JSONSchemaEntryResponse.SUCCESS) {
                 if( stop ) {
                     return {

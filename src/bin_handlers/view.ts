@@ -32,9 +32,6 @@ export const handler = async (argv: Args) => {
 
     const issue = getIssueFromFile(argv.selector + issue_file_ext) //Update to be able to use selectors other than ID
 
-    console.log(issue)
-
-
     const renderers: IssueRenderers = {
         description: printIssueDescription
     }
