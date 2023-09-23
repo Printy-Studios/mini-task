@@ -1,6 +1,5 @@
 {
     "id": "markdown-renderer",
-    "enabled": true,
     "functions": {
         "printIssueDescription": true
     }

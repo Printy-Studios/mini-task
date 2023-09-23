@@ -53,8 +53,7 @@ const parsePluginIndex = (plugin_folder_path: string): PluginMetadata => {
     }
 
     const required_keys = [
-        'id',
-        'enabled'
+        'id'
     ]
     
     const missing_keys = hasKeys(metadata, required_keys)
@@ -77,18 +76,48 @@ class PluginManager {
     constants: PluginConstants = {}
     functions_loaded: boolean = false
 
-    constructor() {
+    constructor(minitask_config?: MinitaskConfig) {
+        log('Constructing a PluginManager instance')
+        if(!minitask_config) {
+            minitask_config = getConfigFromFile()
+        }
 
-        //console.log('constructing plugin manager')
+        if (!minitask_config.plugins) {
+            log('No plugins specified in minitask.json, skipping plugin manager initialization')
+            return
+        }
 
         const plugin_folder_names = fs.readdirSync(plugins_dir)
 
-        for (const plugin_folder_name of plugin_folder_names) {
-            const metadata = parsePluginIndex(path.join(plugins_dir, plugin_folder_name))
-            if((metadata.id in this.plugins)) {
-                throw new Error('Plugin id clash for ' + metadata.id)
+        const isPluginEnabled = (plugin: MinitaskConfigPlugin) => {
+            return (
+                (
+                    typeof plugin === 'object' &&
+                    plugin.enabled
+                ) ||
+                (
+                    typeof plugin === 'boolean' &&
+                    plugin === true
+                )
+            )
+        }
+
+        for (const plugin_id in minitask_config.plugins) {
+            if (
+                plugin_folder_names.includes(plugin_id) &&
+                isPluginEnabled(minitask_config.plugins[plugin_id])
+            ) {
+                const metadata = parsePluginIndex(path.join(plugins_dir, plugin_id))
+                if((metadata.id in this.plugins)) {
+                    throw new Error('Plugin id clash for ' + metadata.id)
+                }
+                metadata.enabled = true
+                this.plugins[metadata.id] = metadata
+                log('Plugin ' + plugin_id + ' enabled')
+            } else {
+                log('Plugin ' + plugin_id + ' not defined in minitask.json or disabled, skipping')
             }
-            this.plugins[metadata.id] = metadata
+            
         }
     }
 
