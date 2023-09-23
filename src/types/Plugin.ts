@@ -8,7 +8,24 @@ export type PluginFunctions = {
     printIssueDescription?: PrintIssueDescriptionFunction
 }
 
-export type PluginModule = PluginFunctions
+export type PluginConstants = {
+
+}
+
+export type PluginMetadata = {
+    id: string,
+    plugin_path: string,
+    enabled: boolean,
+    functions?: PluginFunctions
+    constants?: PluginConstants
+}
+
+export type PluginModule = PluginFunctions | PluginConstants
+
+export type Plugin = {
+    module: PluginModule,
+    metadata: PluginMetadata
+}
 
 export type IssueRenderers = {
     description: (description: string) => void
