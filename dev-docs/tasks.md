@@ -2,7 +2,9 @@
 
 This document describes the tasks that must be done for this project (ironic, isn't it?)
 
-## PluginManager - load constants
+## Add plugin config options to `minitask.json`
+
+## move conditionalChalk to its own file
 
 ## Add and use 'copyfiles' and 'cleardir' packages for when building the TS
 
@@ -13,6 +15,8 @@ This document describes the tasks that must be done for this project (ironic, is
 [See this](https://stackoverflow.com/a/22129960/1673694). This is necessary for the markdown renderer settings where you must pass `chalk`'s properties
 
 ## Add `minitask-user.json` section to README
+
+## ~~PluginManager - load constants~~
 
 ## ~~Add '--ni' to 'list'~~
 
