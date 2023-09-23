@@ -72,6 +72,7 @@ class PluginManager {
         [plugin_id: string]: PluginMetadata   
     } = {}
     functions: PluginFunctions = {}
+    constants: PluginConstants = {}
     functions_loaded: boolean = false
 
     constructor() {
@@ -93,8 +94,33 @@ class PluginManager {
         return this.plugins[plugin_id]
     }
 
-    loadFunctions = async () => {
-        log('Loading plugin functions')
+    /**
+     * Load exports from a plugin's module according to the passed exports list
+     * and load them onto the passed variable
+     * @param { Plugin } plugin   plugin which's modules to export
+     * @param { object } _exports object where keys are the export names
+     * @param { object } loadonto object on which to load the exports, such as 
+     * this.functions | this.constants | etc.
+     * 
+     * @returns { null | _exports } null or list of exports that were missing if there were any
+     */
+    loadPluginModuleExports = (_module: PluginModule, _exports: { [property: string]: any}, loadonto: PluginModule) => {
+
+        const missing_exports = {}
+
+        for(const export_name in _exports) {
+            if(!_module[export_name]) {
+                missing_exports[export_name] = _exports[export_name]
+            } else {
+                loadonto[export_name] = _module[export_name]
+            }
+        }
+
+        return Object.keys(missing_exports).length ? missing_exports : null
+    }
+
+    loadModules = async () => {
+        log('Loading plugin modules')
         for (const plugin_id in this.plugins) {
             const current_plugin = this.plugins[plugin_id]
             if (!current_plugin.enabled) {
@@ -102,20 +128,37 @@ class PluginManager {
                 continue
             }
             const current_plugin_functions = current_plugin.functions
-            if (current_plugin_functions) {
+            const current_plugin_constants = current_plugin.constants
+            if (
+                current_plugin_functions ||
+                current_plugin_constants
+            ) {
                 let plugin_module: PluginModule
                 try {
                     plugin_module = await import(path.join(current_plugin.plugin_path, 'index.js'))
                 } catch (err) {
                     throw new Error('An error occured while loading plugin ' + current_plugin.id + ': ' + err)
                 }
-                for(const plugin_function_name in current_plugin_functions) {
-                    if(!plugin_module[plugin_function_name]) {
-                        console.warn(`In plugin ${current_plugin.id}: function ${ plugin_function_name } that is defined in index.json is not being exported in index.js|ts`)
-                    } else {
-                        this.functions[plugin_function_name] = plugin_module[plugin_function_name]
+
+                
+
+                if (current_plugin_functions) {
+                    const missing_exports = this.loadPluginModuleExports(plugin_module, current_plugin_functions, this.functions) 
+                    if (missing_exports) {
+                        for (const export_name in missing_exports) {
+                            console.warn(`In plugin ${current_plugin.id}: function ${ export_name } that is defined in index.json is not being exported in index.js|ts`)
+                        }
                     }
                 }
+                if (current_plugin_constants) {
+                    const missing_exports = this.loadPluginModuleExports(plugin_module, current_plugin_constants, this.constants) 
+                    if (missing_exports) {
+                        for (const export_name in missing_exports) {
+                            console.warn(`In plugin ${current_plugin.id}: constant ${ export_name } that is defined in index.json is not being exported in index.js|ts`)
+                        }
+                    }
+                }
+                
             }
         }
     }

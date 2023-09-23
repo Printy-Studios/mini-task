@@ -24,7 +24,7 @@ export const handler = async (argv: Args) => {
 
     const plugins = new PluginManager()
 
-    await plugins.loadFunctions()
+    await plugins.loadModules()
 
     //plugins.loadConstants #TODO
 

@@ -62,7 +62,7 @@ const saveIssueToFile: SaveIssueToFileFunction = async (_path: string, issue: Is
 export const handler = async (argv: args) => {
     log(argv)
 
-    await plugins.loadFunctions()
+    await plugins.loadModules()
 
     if (!argv.name) {
         console.log('No name specified, running minitask in interactive mode(TODO)')
