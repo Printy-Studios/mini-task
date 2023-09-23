@@ -4,6 +4,8 @@ This document describes the tasks that must be done for this project (ironic, is
 
 ## Add plugin config options to `minitask.json`
 
+## Add 'plugin not specified in `minitask.json`' message
+
 ## move conditionalChalk to its own file
 
 ## Add and use 'copyfiles' and 'cleardir' packages for when building the TS
