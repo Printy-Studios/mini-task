@@ -10,7 +10,7 @@ export default function getIssueFromFile(filename: string, custom_dir: string = 
 
     let target_path = custom_dir
 
-    //Only load config file if needed to save resources
+    //Only load config file if needed, to save resources
     if( !target_path ) {
         const config = getConfigFromFile()
 
