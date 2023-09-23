@@ -1,3 +1,9 @@
 {
-    "issues-path": "issues"
+    "issues-path": "issues",
+    "plugins": {
+        "txt-format": true,
+        "markdown-renderer": {
+            "enabled": true
+        }
+    }
 }
