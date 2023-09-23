@@ -18,7 +18,9 @@
     "bin_handlers": "./dist/src/bin_handlers",
     "bin": "./dist/src/bin",
     "functions": "./dist/src/functions",
-    "utils": "./dist/src/utils"
+    "utils": "./dist/src/utils",
+    "constants": "./dist/src/constants",
+    "enums": "./dist/src/enums"
   },
   "keywords": [
     "issue",
