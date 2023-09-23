@@ -1,16 +1,15 @@
 import * as fs from 'fs'
 import * as path from 'path'
 import log from './log'
-import { SaveIssueToFileFunction, PluginFunctions, PluginModule } from 'types/Plugin'
+import { 
+    PluginMetadata, 
+    PluginFunctions, 
+    PluginModule,
+    Plugin,
+    PluginConstants
+ } from 'types/Plugin'
 
 const plugins_dir = path.join(__dirname, '../../plugins')
-
-type PluginMetadata = {
-    id: string,
-    plugin_path: string,
-    enabled: boolean,
-    functions?: PluginFunctions
-}
 
 /**
  * Checks if given object has the specified keys
