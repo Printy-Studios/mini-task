@@ -8,6 +8,8 @@ import {
     Plugin,
     PluginConstants
  } from 'types/Plugin'
+import { MinitaskConfig, MinitaskConfigPlugin } from 'types/Config'
+import getConfigFromFile from './getConfigFromFile'
 
 const plugins_dir = path.join(__dirname, '../../plugins')
 
