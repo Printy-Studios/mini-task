@@ -18,6 +18,8 @@ This document describes the tasks that must be done for this project (ironic, is
 
 ## Add `minitask-user.json` section to README
 
+## ~~Add plugin config options to `minitask.json`~~
+
 ## ~~Add 'unknown setting in `minitask.json` message'~~
 
 ## ~~PluginManager - load constants~~
