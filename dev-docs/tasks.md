@@ -2,10 +2,6 @@
 
 This document describes the tasks that must be done for this project (ironic, isn't it?)
 
-## `In plugin txt-format: function 0 that is defined in index.json is not being exported in index.js|ts`
-
-Should say function 'function_name' instead of function 0
-
 ## Add support for .js config files
 
 ## Markdown renderer plugin styling options
@@ -24,6 +20,8 @@ Should say function 'function_name' instead of function 0
 
 ## Add `minitask-user.json` section to README
 
+# Completed
+
 ## ~~Add plugin config options to `minitask.json`~~
 
 ## ~~Add 'unknown setting in `minitask.json` message'~~
@@ -33,3 +31,9 @@ Should say function 'function_name' instead of function 0
 ## ~~Add '--ni' to 'list'~~
 
 ## ~~Remove '--ni' from 'view'~~
+
+# Cancelled
+
+## ~~`In plugin txt-format: function 0 that is defined in index.json is not being exported in index.js|ts`~~
+
+~~Should say function 'function_name' instead of function 0~~
