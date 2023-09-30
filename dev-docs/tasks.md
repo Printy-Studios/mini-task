@@ -2,7 +2,11 @@
 
 This document describes the tasks that must be done for this project (ironic, isn't it?)
 
-## Add plugin config options to `minitask.json`
+## `In plugin txt-format: function 0 that is defined in index.json is not being exported in index.js|ts`
+
+Should say function 'function_name' instead of function 0
+
+
 
 ## Add 'plugin not specified in `minitask.json`' message
 
