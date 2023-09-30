@@ -6,6 +6,8 @@ This document describes the tasks that must be done for this project (ironic, is
 
 Should say function 'function_name' instead of function 0
 
+## Add support for .js config files
+
 ## Markdown renderer plugin styling options
 
 ## Add 'plugin not specified in `minitask.json`' message
