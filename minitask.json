@@ -3,7 +3,8 @@
     "plugins": {
         "txt-format": true,
         "markdown-renderer": {
-            "enabled": true
+            "enabled": true,
+            "test-property": 123
         }
     }
 }

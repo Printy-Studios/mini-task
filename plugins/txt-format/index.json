@@ -1,7 +1,8 @@
 {
     "id": "txt-format",
     "functions": [
-        "saveIssueToFile"
+        "saveIssueToFile",
+        "setConfig"
     ],
     "constants": {
         "issue_file_ext": "txt"

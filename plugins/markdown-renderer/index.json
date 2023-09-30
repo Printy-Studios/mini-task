@@ -1,6 +1,7 @@
 {
     "id": "markdown-renderer",
     "functions": {
-        "printIssueDescription": true
+        "printIssueDescription": true,
+        "setConfig": true
     }
 }
