@@ -79,10 +79,18 @@ class PluginManager {
 
     minitask_config: MinitaskConfig
 
-    constructor(minitask_config?: MinitaskConfig) {
+    /**
+     * Empty constructor. Must call init() method before using this class(need to use
+     * init() because constructors don't support async, which we need)
+     */
+    constructor() {
+        
+    }
+
+    async init(minitask_config?: MinitaskConfig) {
         log('Constructing a PluginManager instance')
         if(!minitask_config) {
-            this.minitask_config = getConfigFromFile()
+            this.minitask_config = await getConfigFromFile()
         }
 
         if (!this.minitask_config.plugins) {

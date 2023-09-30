@@ -19,7 +19,6 @@ import PluginManager from 'functions/plugins'
 
 const plugins = new PluginManager()
 
-
 export const command = 'new [name]'
 
 type args = Omit<Issue, 'name'> & {
@@ -62,6 +61,7 @@ const saveIssueToFile: SaveIssueToFileFunction = async (_path: string, issue: Is
 export const handler = async (argv: args) => {
     log(argv)
 
+    await plugins.init()
     await plugins.loadModules()
 
     if (!argv.name) {
@@ -76,7 +76,7 @@ export const handler = async (argv: args) => {
         }
     }
 
-    const config = getConfigFromFile()
+    const config = await getConfigFromFile()
 
     if (!config) {
         console.log('Could not find minitask.json')

@@ -5,26 +5,30 @@ import { Issue } from 'types/Issue'
 import * as yamlFront from 'yaml-front-matter'
 
 import getConfigFromFile from './getConfigFromFile'
+import log from './log'
 
-export default function getIssueFromFile(filename: string, custom_dir: string = null) {
+export default async function getIssueFromFile(filename: string, custom_dir: string = null) {
+
+    log('Getting issue from file ' + filename)
 
     let target_path = custom_dir
 
     //Only load config file if needed, to save resources
     if( !target_path ) {
-        const config = getConfigFromFile()
+        log('Target path not specified, getting one from minitask config')
+        const config = await getConfigFromFile()
 
         if (!config) {
-            console.log('Could not find minitask.json')
-            return
+            throw new Error('Could not find minitask config')
         }
 
-        target_path = custom_dir || config['issues-path']
+        target_path = config['issues-path']
+        log('Target path: ' + target_path)
     }
     
 
     
-
+    
     const issue_str = fs.readFileSync(path.join(target_path, filename), { encoding: 'utf-8'})
 
     const issue_raw_json = yamlFront.safeLoadFront(issue_str, { contentKeyName: 'description'})

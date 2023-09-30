@@ -14,7 +14,6 @@ export const command = 'init'
  */
 const initForUser = (target_folder: string, overwrite = false) => {
     target_folder = path.join(target_folder, 'minitask')
-    console.log(target_folder)
     const path_exists = fs.existsSync(target_folder)
     if(path_exists && !overwrite) {
         throw new Error('Could not initialize minitask user directory: folder already exists')
@@ -44,5 +43,4 @@ export const handler = (argv) => {
         //initForUser(process.env.ProgramFiles, true)
     }
 
-    //console.log(process.env.ProgramFiles)
 }
