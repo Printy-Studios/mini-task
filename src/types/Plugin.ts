@@ -22,7 +22,12 @@ export type PluginMetadata = {
     constants?: PluginConstants
 }
 
-export type PluginModule = PluginFunctions & PluginConstants
+export type PluginExport = PluginFunctions | PluginConstants
+
+export type PluginModule = {
+    constants?: PluginConstants,
+    functions?: PluginFunctions
+}
 
 export type Plugin = {
     module: PluginModule,

@@ -6,7 +6,8 @@ import {
     PluginFunctions, 
     PluginModule,
     Plugin,
-    PluginConstants
+    PluginConstants,
+    PluginExport
  } from 'types/Plugin'
 import { MinitaskConfig, MinitaskConfigPlugin } from 'types/Config'
 import getConfigFromFile from './getConfigFromFile'
@@ -136,28 +137,22 @@ class PluginManager {
     }
 
     /**
-     * Load exports from a plugin's module according to the passed exports list
-     * and load them onto the passed variable
-     * @param { Plugin } plugin   plugin which's modules to export
-     * @param { object } _exports object where keys are the export names
-     * @param { object } loadonto object on which to load the exports, such as 
+     * Load exports from a plugin's module onto the passed variable
+     * @param { Plugin } plugin   exports from plugin such as 'functions' or 'constants'
+     * @param { object } loadonto object in which to store the exports, such as 
      * this.functions | this.constants | etc.
      * 
-     * @returns { null | _exports } null or list of exports that were missing if there were any
+     * @returns { null | _exports } null or list of exports that were missing if there were any.
+     * Throws error if there are conficts with existing loaded exports
      */
-    loadPluginModuleExports = (_module: PluginModule, _exports: { [property: string]: any}, loadonto: PluginModule) => {
-
-        const missing_exports = {}
-
-        for(const export_name in _exports) {
-            if(!_module[export_name]) {
-                missing_exports[export_name] = _exports[export_name]
-            } else {
-                loadonto[export_name] = _module[export_name]
-            }
+    loadPluginModuleExports = (plugin_exports: PluginExport, loadonto: PluginExport) => {
+        for(const export_name in plugin_exports) {
+            if (loadonto[export_name]) {
+                throw new Error('Clash between plugin exports ' + export_name)
+            } 
         }
 
-        return Object.keys(missing_exports).length ? missing_exports : null
+        Object.assign(loadonto, plugin_exports)
     }
 
     /**
@@ -184,28 +179,17 @@ class PluginManager {
                 } catch (err) {
                     throw new Error('An error occured while loading plugin ' + current_plugin.id + ': ' + err)
                 }
-
                 
-
-                if (current_plugin_functions) {
-                    const missing_exports = this.loadPluginModuleExports(plugin_module, current_plugin_functions, this.functions) 
-                    if (missing_exports) {
-                        for (const export_name in missing_exports) {
-                            console.warn(`In plugin ${current_plugin.id}: function ${ export_name } that is defined in index.json is not being exported in index.js|ts`)
-                        }
-                    }
-                    //Set config for the plugin accoring to minitask.json
-                    if (plugin_module.setConfig) {
-                        plugin_module.setConfig(this.minitask_config.plugins[plugin_id])
-                    }
+                //Set configuration for plugin according to the plugin's configuration in minitask.json
+                if (plugin_module.functions?.setConfig) {
+                    plugin_module.functions.setConfig(this.minitask_config.plugins[plugin_id])
                 }
-                if (current_plugin_constants) {
-                    const missing_exports = this.loadPluginModuleExports(plugin_module, current_plugin_constants, this.constants) 
-                    if (missing_exports) {
-                        for (const export_name in missing_exports) {
-                            console.warn(`In plugin ${current_plugin.id}: constant ${ export_name } that is defined in index.json is not being exported in index.js|ts`)
-                        }
-                    }
+
+                if (plugin_module.functions) {
+                    this.loadPluginModuleExports(plugin_module.functions, this.functions)
+                }
+                if (plugin_module.constants) {
+                    this.loadPluginModuleExports(plugin_module.constants, this.constants)
                 }
                 
             }

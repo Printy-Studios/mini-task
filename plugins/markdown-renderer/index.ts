@@ -7,10 +7,15 @@ marked.setOptions({
     renderer: new MDRenderer()
 })
 
-export function printIssueDescription(description: string) {
+function printIssueDescription(description: string) {
     console.log(marked.parse(description))
 }
 
-export function setConfig(config) {
+function setConfig(config) {
     console.log('Getting config from Markdown Renderer plugin: ', config)
+}
+
+export const functions = {
+    printIssueDescription,
+    setConfig
 }

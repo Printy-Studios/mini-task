@@ -3,7 +3,7 @@ import * as path from 'path'
 
 import { Issue } from 'types/Issue'
 
-export async function saveIssueToFile (_path: string, issue: Issue) {
+async function saveIssueToFile (_path: string, issue: Issue) {
 
     //String to be written to file
     let output_str = 'My custom file format!\n'
@@ -25,4 +25,12 @@ export async function saveIssueToFile (_path: string, issue: Issue) {
     fs.writeFileSync(path.join(_path, issue.metadata.id + '.txt'), output_str)
 }
 
-export const issue_file_ext = 'txt'
+const issue_file_ext = 'txt'
+
+export const functions = {
+    saveIssueToFile
+}
+
+export const constants = {
+    issue_file_ext
+}
