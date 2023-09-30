@@ -160,6 +160,10 @@ class PluginManager {
         return Object.keys(missing_exports).length ? missing_exports : null
     }
 
+    /**
+     * Load modules for plugins that are enabled. Additionally set the configuration
+     * for plugins as defined in minitask.json
+     */
     loadModules = async () => {
         log('Loading plugin modules')
         for (const plugin_id in this.plugins) {
@@ -189,6 +193,10 @@ class PluginManager {
                         for (const export_name in missing_exports) {
                             console.warn(`In plugin ${current_plugin.id}: function ${ export_name } that is defined in index.json is not being exported in index.js|ts`)
                         }
+                    }
+                    //Set config for the plugin accoring to minitask.json
+                    if (plugin_module.setConfig) {
+                        plugin_module.setConfig(this.minitask_config.plugins[plugin_id])
                     }
                 }
                 if (current_plugin_constants) {
