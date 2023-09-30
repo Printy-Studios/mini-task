@@ -76,13 +76,15 @@ class PluginManager {
     constants: PluginConstants = {}
     functions_loaded: boolean = false
 
+    minitask_config: MinitaskConfig
+
     constructor(minitask_config?: MinitaskConfig) {
         log('Constructing a PluginManager instance')
         if(!minitask_config) {
-            minitask_config = getConfigFromFile()
+            this.minitask_config = getConfigFromFile()
         }
 
-        if (!minitask_config.plugins) {
+        if (!this.minitask_config.plugins) {
             log('No plugins specified in minitask.json, skipping plugin manager initialization')
             return
         }
@@ -102,10 +104,11 @@ class PluginManager {
             )
         }
 
-        for (const plugin_id in minitask_config.plugins) {
+        //Add plugin metadata from plugins folder for plugins that are enabled
+        for (const plugin_id in this.minitask_config.plugins) {
             if (
                 plugin_folder_names.includes(plugin_id) &&
-                isPluginEnabled(minitask_config.plugins[plugin_id])
+                isPluginEnabled(this.minitask_config.plugins[plugin_id])
             ) {
                 const metadata = parsePluginIndex(path.join(plugins_dir, plugin_id))
                 if((metadata.id in this.plugins)) {
@@ -115,9 +118,16 @@ class PluginManager {
                 this.plugins[metadata.id] = metadata
                 log('Plugin ' + plugin_id + ' enabled')
             } else {
-                log('Plugin ' + plugin_id + ' not defined in minitask.json or disabled, skipping')
+                log('Plugin ' + plugin_id + ' not installed or disabled, skipping')
+            } 
+        }
+
+        const config_plugin_ids = Object.keys(this.minitask_config.plugins)
+
+        for (const plugin_folder_name of plugin_folder_names) {
+            if (!config_plugin_ids.includes(plugin_folder_name)) {
+                log('Warning: Plugin ' + plugin_folder_name + ' installed but not defined in minitask.json')
             }
-            
         }
     }
 
