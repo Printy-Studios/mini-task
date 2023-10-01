@@ -4,6 +4,8 @@ This document describes the tasks that must be done for this project (ironic, is
 
 ## Create a 'tell()' function for outputting info to the user(for readability and easier cleanup when cleaning up after console.log debugs)
 
+## Refactor plugin functions for printing to parse and return string instead of having to log to console
+
 ## Add 'plugin not specified in `minitask.json`' message
 
 ## move conditionalChalk to its own file
