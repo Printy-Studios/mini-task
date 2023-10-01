@@ -28,7 +28,7 @@ export default async function getConfigFromFile() {
     Throw error if neither are found 
     */
     if ( config_file_js ) {
-        config = await import(path.join(config_file_js.path, 'minitask.js'))
+        config = (await import(path.join(config_file_js.path, 'minitask.js'))).default
         file_path = config_file_js.path
         log('Found minitask.js config file at ' + file_path)
     } else if (config_file_json) {
