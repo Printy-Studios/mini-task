@@ -1,5 +1,5 @@
 //Core
-import * as chalk from 'chalk'
+import chalk from 'chalk'
 
 //Types
 import { IssueRenderers } from 'types/Plugin'
