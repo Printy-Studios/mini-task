@@ -8,6 +8,7 @@ import {
     IssuePriority, 
     IssueStatus 
 } from 'types/Issue'
+import tell from 'utils/tell'
 
 //const conditionalBg = (color: string | undefined | null) => color ? chalk.bgHex(color) : chalk
 //const conditionalColor = (color: string | undefined | null) => color ? chalk.Color : chalk
@@ -18,32 +19,32 @@ const conditionalBg = (color: string | undefined | null) => conditionalChalk<str
 const conditionalColor = (color: string | undefined | null) => conditionalChalk<string>(color, chalk.hex)
 
 const printIssueID = (id: string) => {
-    console.log(chalk.italic.whiteBright(id))
+    tell(chalk.italic.whiteBright(id))
 }
 
 const printIssueName = (name: string) => {
-    console.log(chalk.yellow.underline.bold(name))
+    tell(chalk.yellow.underline.bold(name))
 }
 
 const printIssueStatus = (status: IssueStatus) => {
     const str = (status ? status.label || status.value : '-')
     
-    console.log("Status: " + conditionalBg(status?.bgColor)(conditionalColor(status?.color)(str)))
+    tell("Status: " + conditionalBg(status?.bgColor)(conditionalColor(status?.color)(str)))
 }
 
 const printIssuePriority = (priority: IssuePriority) => {
     const str = (priority ? priority.label || priority.value : '-')
 
-    console.log("Priority: " + conditionalBg(priority?.bgColor)(conditionalColor(priority?.color)(str)))
+    tell("Priority: " + conditionalBg(priority?.bgColor)(conditionalColor(priority?.color)(str)))
 }
 
 export default function printIssue(issue: Issue, renderers: IssueRenderers) {
     printIssueID(issue.metadata.id) //Pluggable
-    console.log('')
+    tell('')
     printIssueName(issue.name) //Pluggable
-    console.log('')
+    tell('')
     printIssueStatus(issue.metadata.status)
     printIssuePriority(issue.metadata.priority)
-    console.log('')
+    tell('')
     renderers.description(issue.description)
 }

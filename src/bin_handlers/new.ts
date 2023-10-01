@@ -15,6 +15,7 @@ import { SaveIssueToFileFunction } from 'types/Plugin'
 import { MinitaskConfig } from 'types/Config'
 
 import PluginManager from 'functions/plugins'
+import tell from 'utils/tell'
 
 
 const plugins = new PluginManager()
@@ -65,7 +66,7 @@ export const handler = async (argv: args) => {
     await plugins.loadModules()
 
     if (!argv.name) {
-        console.log('No name specified, running minitask in interactive mode(TODO)')
+        tell('No name specified, running minitask in interactive mode(TODO)')
         return
     }
 
@@ -79,7 +80,7 @@ export const handler = async (argv: args) => {
     const config = await getConfigFromFile()
 
     if (!config) {
-        console.log('Could not find minitask.json')
+        tell('Could not find minitask.json')
         return
     }
 
@@ -89,6 +90,6 @@ export const handler = async (argv: args) => {
         saveIssueToFile(config['issues-path'], new_issue)
     }
 
-    console.log('created new issue!')
+    tell('created new issue!')
 
 }

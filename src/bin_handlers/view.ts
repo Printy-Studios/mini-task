@@ -5,9 +5,10 @@ import getIssueFromFile from 'functions/getIssueFromFile'
 
 //Types
 import { IssueRenderers } from 'types/Plugin'
+import tell from 'utils/tell'
 
 const printIssueDescription = (description: string) => {
-    console.log(description)
+    tell(description)
 }
 
 export const command = 'view [selector]' //Currently only supports ID selector
