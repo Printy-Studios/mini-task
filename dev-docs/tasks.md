@@ -2,8 +2,6 @@
 
 This document describes the tasks that must be done for this project (ironic, isn't it?)
 
-## Markdown renderer plugin styling options
-
 ## Create a 'tell()' function for outputting info to the user(for readability and easier cleanup when cleaning up after console.log debugs)
 
 ## Add 'plugin not specified in `minitask.json`' message
@@ -21,6 +19,8 @@ This document describes the tasks that must be done for this project (ironic, is
 ## Add `minitask-user.json` section to README
 
 # Completed
+
+## ~~Markdown renderer plugin styling options~~
 
 ## ~~Add support for .js config files~~
 
