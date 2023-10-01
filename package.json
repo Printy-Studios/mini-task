@@ -38,6 +38,7 @@
   "homepage": "https://github.com/Printy-Studios/mini-task#readme",
   "devDependencies": {
     "@types/chalk": "^2.2.0",
+    "@types/marked-terminal": "^3.1.4",
     "@types/node": "^20.6.2",
     "copyfiles": "^2.4.1",
     "rimraf": "^5.0.1",
