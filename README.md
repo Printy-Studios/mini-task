@@ -175,3 +175,48 @@ A typical `mini-task.json` file looks like this
      }
      ```
      Where `arg#` is the name of the `list` command's arg
+
+## Plugins
+
+minitask has fairly extensive support for plugins. Things that you can do with the plugin include:
+
+ * Altering the output, such as -
+   * Menu elements such as titles and options
+   * Issue elements such as description, name, priority etc.
+ * Altering the functions that handle text output, i.e the functions such as `tell()` and `log()`
+ * Altering the functions that handle input
+ * Adding additional metadata to issues
+
+minitask has several native plugins developed by the minitask team itself, these are:
+ * markdown-renderer - style your makrdown descriptions with custom colors, underlines etc.
+ * txt-format - use `.txt` format instead of `.md` for storing issues
+
+## Developing a plugin
+
+Developing a plugin is pretty easy. A basic plugin will have at least the following 2 files:
+  * `index.json` - plugin config and metadata
+  * `index.ts|js` - plugin code and exports that will be imported by minitask
+
+### `index.json`
+
+This file holds metadata and configuration for the plugin, required is only a single property - `id` - that should be a unique string identifying your plugin and should match the folder name of the plugin
+
+### `index.ts|js`
+
+This is the entry file of your plugin. This file will be imported by minitask when loading plugins, so you must export all the functions/variables that interact with minitask here.
+
+**The export format**
+
+The exports in `index.ts|js` must follow a specific format. You can export an object called `functions` for the functions, and an object called `constants` for the constants. Both are optional. In the respective objects, you can store functions/variables matching the name of a minitask plugin function/variable that will be called by minitask. For example you can have a `functions` object like this: 
+
+```
+  export const functions = {
+    parseIssueDescription: (description: string) => {...}
+    parseIssueName: (name: string) => {...}
+  }
+```
+
+`parseIssue___()` functions are used to alter the respective issue data before they are output to the console. So when you add them to the `functions` export, they will be called by minitask at appropriate times, and minitask will output your altered versions of the text
+
+That's the basic gist of it. You can visit [the Plugins API](#) for reference of all available functions and constants
+
