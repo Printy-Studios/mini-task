@@ -107,18 +107,15 @@ As you can see the file is a regular, readable Markdown file. At the very top yo
 
 mini-task can be extended to support other file formats as well!
 
-## mini-task.json
+## mini-task.json|js
 
-The `mini-task.json` file specifies the settings for the project scope.
+The `mini-task.json|js` file specifies the project scoped settings.
 
 A typical `mini-task.json` file looks like this
 
 ```
 {
     "issues-path": "./issues"
-    "markdown-style": {
-        "em": "chalk.italic"
-    },
     "tags": {
       "bug": "chalk.red",
       "feature": "chalk.yellow",
@@ -149,32 +146,43 @@ A typical `mini-task.json` file looks like this
         "sortorder: "desc"
       }
     ]
+    "plugins": {
+      "markdown-renderer": {
+        "enabled": true,
+        "heading": "#fcba03",
+        "code": "#849680"
+      }
+    }
 }
 ```
 
+It's also possible to have a `minitask.js` instead of `minitask.json`. This is
+useful if you want to configure such settings that require a function or a call
+to a function, for example when setting colors with [chalk](#TODO)
+
 ### Properties
 
- - `issues-path`    - **required** - defines the path for the folder where the issue files will be stored
- - `markdown-style` - *optional*   - defines the styles for the markdown renderer when viewing issues. See [markded-terminal](https://www.npmjs.com/package/marked-terminal#options) for a list of options
- - `tags` - defines the tags to be used when creating/editing issues. Should be formatted like so:
-   - ```
-     "tags": {
-      "name": "color"
-      "name": "color"
-     }
-     ```
- - `statuses` - defines the statuses to be used when creating/editing issues. Follows same format as `tags`
- - `assignees` - defines the possible assignees to an issue, should be an array of names
- - `list-presets` - defines the presets for when using `minitask list`. Should follow the following format:
-   - ```
-     "list-presets": {
-       "preset-name": {
-         "arg1": "value",
-         "arg2": "value"
-       } 
-     }
-     ```
-     Where `arg#` is the name of the `list` command's arg
+ -  `issues-path`    - **required** - defines the path for the folder where the issue files will be stored
+ -  `tags` - defines the tags to be used when creating/editing issues. Should be formatted like so:
+    ```
+      "tags": {
+        "name": "color"
+        "name": "color"
+      }
+    ```
+    You can omit the color and just pass `true`
+ -  `statuses` - defines the statuses to be used when creating/editing issues. Follows same format as `tags`
+ -  `assignees` - defines the possible assignees to an issue, follows same format as `tags`
+ -  `list-presets` - defines the presets for when using `minitask list`. Should follow the following format:
+    ```
+      "list-presets": {
+        "preset-name": {
+          "arg1": "value",
+          "arg2": "value"
+        } 
+      }
+    ```
+    Where `arg#` is the name of the `list` command's arg
 
 ## Plugins
 
