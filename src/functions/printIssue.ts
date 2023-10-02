@@ -10,7 +10,7 @@ import {
 } from 'types/Issue'
 
 //Util
-import tell from 'utils/tell'
+import tell from 'common/utils/tell'
 
 const conditionalChalk = <T,>(value: T, chalkBuilder: (value: T) => chalk.Chalk): chalk.Chalk => 
     value ? chalkBuilder.call(chalk, value) : chalk

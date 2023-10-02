@@ -15,7 +15,7 @@ import { SaveIssueToFileFunction } from 'types/Plugin'
 import { MinitaskConfig } from 'types/Config'
 
 import PluginManager from 'functions/plugins'
-import tell from 'utils/tell'
+import tell from 'common/utils/tell'
 
 
 const plugins = new PluginManager()

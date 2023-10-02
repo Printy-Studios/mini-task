@@ -4,9 +4,10 @@
         "sourceMap": true,
         "baseUrl": "./src",
         "paths": {
-            "*": [ "./*" ]
+            "*": [ "./*" ],
+            "common/*": [ "../common/*" ]
         },
         "outDir": "./dist"
     },
-    "include": ["plugins", "src"]
+    "include": ["plugins", "src", "common"]
 }

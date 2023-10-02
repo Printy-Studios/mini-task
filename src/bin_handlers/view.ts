@@ -5,7 +5,7 @@ import getIssueFromFile from 'functions/getIssueFromFile'
 
 //Types
 import { IssueParsers, IssueRenderers, ParseIssueDescriptionFunction } from 'types/Plugin'
-import tell from 'utils/tell'
+import tell from 'common/utils/tell'
 
 const printIssueDescription = (description: string, parsers: ParseIssueDescriptionFunction[]) => {
     for(const parser of parsers) {

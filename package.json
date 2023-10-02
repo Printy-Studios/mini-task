@@ -20,7 +20,8 @@
     "functions": "./dist/src/functions",
     "utils": "./dist/src/utils",
     "constants": "./dist/src/constants",
-    "enums": "./dist/src/enums"
+    "enums": "./dist/src/enums",
+    "common": "./dist/common"
   },
   "keywords": [
     "issue",
