@@ -2,8 +2,6 @@
 
 This document describes the tasks that must be done for this project (ironic, isn't it?)
 
-## Add 'plugin not specified in `minitask.json`' message
-
 ## move conditionalChalk to its own file
 
 ## Add and use 'copyfiles' and 'cleardir' packages for when building the TS
@@ -17,6 +15,8 @@ This document describes the tasks that must be done for this project (ironic, is
 ## Add `minitask-user.json` section to README
 
 # Completed
+
+## ~~Add 'plugin not specified in `minitask.json`' message~~
 
 ## ~~Add plugin information to README.md~~
 
