@@ -2,10 +2,6 @@
 
 This document describes the tasks that must be done for this project (ironic, isn't it?)
 
-## Refactor plugin functions for printing to parse and return string instead of having to log to console
-
-## Add plugin information to README.md
-
 ## Add 'plugin not specified in `minitask.json`' message
 
 ## move conditionalChalk to its own file
@@ -21,6 +17,10 @@ This document describes the tasks that must be done for this project (ironic, is
 ## Add `minitask-user.json` section to README
 
 # Completed
+
+## ~~Add plugin information to README.md~~
+
+## ~~Refactor plugin functions for printing to parse and return string instead of having to log to console~~
 
 ## ~~Create a 'tell()' function for outputting info to the user(for readability and easier cleanup when cleaning up after console.log debugs)~~
 
