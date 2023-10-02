@@ -4,14 +4,6 @@ This document describes the tasks that must be done for this project (ironic, is
 
 ## move conditionalChalk to its own file
 
-
-
-## Try to make the 'new' command handler extensible
-
-## Create a nested string property selector > object resolver 
-
-[See this](https://stackoverflow.com/a/22129960/1673694). This is necessary for the markdown renderer settings where you must pass `chalk`'s properties
-
 ## Add `minitask-user.json` section to README
 
 # Completed
@@ -41,6 +33,12 @@ This document describes the tasks that must be done for this project (ironic, is
 ## ~~Remove '--ni' from 'view'~~
 
 # Cancelled
+
+## ~~Create a nested string property selector > object resolver (*Unneeded due to circumstance change*)~~
+
+~~[See this](https://stackoverflow.com/a/22129960/1673694). This is necessary for the markdown renderer settings where you must pass `chalk`'s properties~~
+
+## ~~Try to make the 'new' command handler extensible (*Marked as too broad*)~~
 
 ## ~~`In plugin txt-format: function 0 that is defined in index.json is not being exported in index.js|ts`~~
 
