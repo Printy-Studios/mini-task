@@ -73,7 +73,9 @@ class PluginManager {
     plugins: {
         [plugin_id: string]: PluginMetadata   
     } = {}
-    functions: PluginFunctions = {}
+    functions: PluginFunctions = {
+        parseIssueDescription: []
+    }
     constants: PluginConstants = {}
     functions_loaded: boolean = false
 
@@ -146,8 +148,8 @@ class PluginManager {
 
     /**
      * Load exports from a plugin's module onto the passed variable
-     * @param { Plugin } plugin   exports from plugin such as 'functions' or 'constants'
-     * @param { object } loadonto object in which to store the exports, such as 
+     * @param { Plugin }    plugin      exports from plugin such as 'functions' or 'constants'
+     * @param { object }    loadonto    object in which to store the exports, such as 
      * this.functions | this.constants | etc.
      * 
      * @returns { null | _exports } null or list of exports that were missing if there were any.
@@ -155,12 +157,18 @@ class PluginManager {
      */
     loadPluginModuleExports = (plugin_exports: PluginExport, loadonto: PluginExport) => {
         for(const export_name in plugin_exports) {
-            if (loadonto[export_name]) {
+            if (Array.isArray(loadonto[export_name])) {
+                loadonto[export_name].push(plugin_exports[export_name])
+            }
+            else if (loadonto[export_name]) {
                 throw new Error('Clash between plugin exports ' + export_name)
-            } 
+            } else {
+                loadonto[export_name] = plugin_exports[export_name]
+                //Object.assign(loadonto, { [export_name]: plugin_exports[export_name] })
+            }
         }
 
-        Object.assign(loadonto, plugin_exports)
+        
     }
 
     /**
