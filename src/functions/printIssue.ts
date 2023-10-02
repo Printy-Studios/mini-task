@@ -2,16 +2,15 @@
 import chalk from 'chalk'
 
 //Types
-import { IssueRenderers } from 'types/Plugin'
+import { IssueParsers, IssueRenderers } from 'types/Plugin'
 import { 
     Issue, 
     IssuePriority, 
     IssueStatus 
 } from 'types/Issue'
-import tell from 'utils/tell'
 
-//const conditionalBg = (color: string | undefined | null) => color ? chalk.bgHex(color) : chalk
-//const conditionalColor = (color: string | undefined | null) => color ? chalk.Color : chalk
+//Util
+import tell from 'utils/tell'
 
 const conditionalChalk = <T,>(value: T, chalkBuilder: (value: T) => chalk.Chalk): chalk.Chalk => 
     value ? chalkBuilder.call(chalk, value) : chalk
@@ -38,7 +37,7 @@ const printIssuePriority = (priority: IssuePriority) => {
     tell("Priority: " + conditionalBg(priority?.bgColor)(conditionalColor(priority?.color)(str)))
 }
 
-export default function printIssue(issue: Issue, renderers: IssueRenderers) {
+export default function printIssue(issue: Issue, renderers: IssueRenderers, parsers: IssueParsers) {
     printIssueID(issue.metadata.id) //Pluggable
     tell('')
     printIssueName(issue.name) //Pluggable
@@ -46,5 +45,5 @@ export default function printIssue(issue: Issue, renderers: IssueRenderers) {
     printIssueStatus(issue.metadata.status)
     printIssuePriority(issue.metadata.priority)
     tell('')
-    renderers.description(issue.description)
+    renderers.description(issue.description, parsers.description)
 }

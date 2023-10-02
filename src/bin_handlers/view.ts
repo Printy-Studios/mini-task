@@ -4,10 +4,13 @@ import PluginManager from 'functions/plugins'
 import getIssueFromFile from 'functions/getIssueFromFile'
 
 //Types
-import { IssueRenderers } from 'types/Plugin'
+import { IssueParsers, IssueRenderers, ParseIssueDescriptionFunction } from 'types/Plugin'
 import tell from 'utils/tell'
 
-const printIssueDescription = (description: string) => {
+const printIssueDescription = (description: string, parsers: ParseIssueDescriptionFunction[]) => {
+    for(const parser of parsers) {
+        description = parser(description)
+    }
     tell(description)
 }
 
@@ -38,7 +41,11 @@ export const handler = async (argv: Args) => {
         renderers.description = plugins.functions.printIssueDescription
     }
 
-    printIssue(issue, renderers)
+    const parsers: IssueParsers = {
+        description: plugins.functions.parseIssueDescription
+    }
+
+    printIssue(issue, renderers, parsers)
 
     // if (plugins.functions.saveIssueToFile) {
     //     plugins.functions.saveIssueToFile(config['issues-path'], new_issue)
