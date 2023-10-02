@@ -184,6 +184,10 @@ to a function, for example when setting colors with [chalk](#TODO)
     ```
     Where `arg#` is the name of the `list` command's arg
 
+## minitask-user.json
+
+`minitask-user.json` holds settings for the user using the CLI. They are global and persist between projects. It resides in `C:/AppData/minitask`. By default this file is not created, and you must create it yourself either manually or by running `minitask init-user`. Alternatively, the file gets created if you update a user setting from `minitask settings`.
+
 ## Plugins
 
 minitask has fairly extensive support for plugins. Things that you can do with the plugin include:
