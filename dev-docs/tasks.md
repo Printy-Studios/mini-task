@@ -2,11 +2,11 @@
 
 This document describes the tasks that must be done for this project (ironic, isn't it?)
 
-## move conditionalChalk to its own file
-
 ## Add `minitask-user.json` section to README
 
 # Completed
+
+## ~~move conditionalChalk to its own file~~
 
 ## ~~Add and use 'copyfiles' and 'cleardir' packages for when building the TS~~
 
