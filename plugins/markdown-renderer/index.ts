@@ -11,8 +11,11 @@ let config: Config = {
 
 }
 
-function printIssueDescription(description: string) {
-    console.log(marked.parse(description))
+function parseIssueDescription(description: string) {
+    description = marked.parse(description)
+
+    return description
+
 }
 
 function setConfig(_config: Config) {
@@ -27,6 +30,6 @@ function setConfig(_config: Config) {
 }
 
 export const functions = {
-    printIssueDescription,
+    parseIssueDescription,
     setConfig
 }
