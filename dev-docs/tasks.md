@@ -4,7 +4,7 @@ This document describes the tasks that must be done for this project (ironic, is
 
 ## move conditionalChalk to its own file
 
-## Add and use 'copyfiles' and 'cleardir' packages for when building the TS
+
 
 ## Try to make the 'new' command handler extensible
 
@@ -15,6 +15,8 @@ This document describes the tasks that must be done for this project (ironic, is
 ## Add `minitask-user.json` section to README
 
 # Completed
+
+## ~~Add and use 'copyfiles' and 'cleardir' packages for when building the TS~~
 
 ## ~~Add 'plugin not specified in `minitask.json`' message~~
 
