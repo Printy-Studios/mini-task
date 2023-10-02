@@ -2,6 +2,10 @@
 
 This document describes the tasks that must be done for this project (ironic, isn't it?)
 
+# Todo
+
+## Create `Logger` class and replace `log()` with it
+
 # Completed
 
 ## ~~Add `minitask-user.json` section to README~~
