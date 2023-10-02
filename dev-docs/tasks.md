@@ -2,9 +2,9 @@
 
 This document describes the tasks that must be done for this project (ironic, isn't it?)
 
-## Add `minitask-user.json` section to README
-
 # Completed
+
+## ~~Add `minitask-user.json` section to README~~
 
 ## ~~move conditionalChalk to its own file~~
 
