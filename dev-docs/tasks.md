@@ -4,6 +4,8 @@ This document describes the tasks that must be done for this project (ironic, is
 
 ## Refactor plugin functions for printing to parse and return string instead of having to log to console
 
+## Add plugin information to README.md
+
 ## Add 'plugin not specified in `minitask.json`' message
 
 ## move conditionalChalk to its own file
