@@ -240,4 +240,4 @@ If you want to work on the project:
  1. Clone the repo
  2. run `npm install` to install dependencies
  3. run `npm run build` to build project
- 3. run `npm run minitask` to build and run minitask
+ 3. run `npm run minitask` to run minitask
