@@ -1,6 +1,6 @@
 import * as fs from 'fs'
 import * as path from 'path'
-import log from './log'
+import Logger from './Logger'
 import { 
     PluginMetadata, 
     PluginFunctions, 
@@ -11,6 +11,8 @@ import {
  } from 'types/Plugin'
 import { MinitaskConfig, MinitaskConfigPlugin } from 'types/Config'
 import getConfigFromFile from './getConfigFromFile'
+
+const logger = new Logger(true, 'Log')
 
 const plugins_dir = path.join(__dirname, '../../plugins')
 
@@ -90,13 +92,13 @@ class PluginManager {
     }
 
     async init(minitask_config?: MinitaskConfig) {
-        log('Constructing a PluginManager instance')
+        logger.log('Constructing a PluginManager instance')
         if(!minitask_config) {
             this.minitask_config = await getConfigFromFile()
         }
 
         if (!this.minitask_config.plugins) {
-            log('No plugins specified in minitask.json, skipping plugin manager initialization')
+            logger.log('No plugins specified in minitask.json, skipping plugin manager initialization')
             return
         }
 
@@ -127,9 +129,9 @@ class PluginManager {
                 }
                 metadata.enabled = true
                 this.plugins[metadata.id] = metadata
-                log('Plugin ' + plugin_id + ' enabled')
+                logger.log('Plugin ' + plugin_id + ' enabled')
             } else {
-                log('Plugin ' + plugin_id + ' not installed or disabled, skipping')
+                logger.log('Plugin ' + plugin_id + ' not installed or disabled, skipping')
             } 
         }
 
@@ -137,7 +139,7 @@ class PluginManager {
 
         for (const plugin_folder_name of plugin_folder_names) {
             if (!config_plugin_ids.includes(plugin_folder_name)) {
-                log('Warning: Plugin ' + plugin_folder_name + ' installed but not defined in minitask.json')
+                logger.log('Warning: Plugin ' + plugin_folder_name + ' installed but not defined in minitask.json')
             }
         }
     }
@@ -176,11 +178,11 @@ class PluginManager {
      * for plugins as defined in minitask.json
      */
     loadModules = async () => {
-        log('Loading plugin modules')
+        logger.log('Loading plugin modules')
         for (const plugin_id in this.plugins) {
             const current_plugin = this.plugins[plugin_id]
             if (!current_plugin.enabled) {
-                log(`Plugin ${current_plugin.id} is disabled, skipping`)
+                logger.log(`Plugin ${current_plugin.id} is disabled, skipping`)
                 continue
             }
             const current_plugin_functions = current_plugin.functions

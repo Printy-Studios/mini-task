@@ -6,5 +6,6 @@
             "enabled": true,
             "test-property": 123
         }
-    }
+    },
+    "logs": true
 }

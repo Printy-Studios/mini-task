@@ -2,7 +2,9 @@ import * as fs from 'fs'
 import * as path from 'path'
 import findFileUp from 'utils/findFileUp'
 
-import log from 'functions/log'
+import Logger from 'functions/Logger'
+
+const logger = new Logger(true, 'Log')
 
 export const command = 'init'
 
@@ -35,7 +37,7 @@ const findLocalNodeModulesFolder = (search_from_path: string) => {
 }
 
 export const handler = (argv) => {
-    log(argv)
+    logger.log(argv, 'data')
 
     const node_modules_path = findLocalNodeModulesFolder(process.env.INIT_CWD)
 

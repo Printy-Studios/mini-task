@@ -3,7 +3,7 @@ import * as fs from 'fs'
 import * as path from 'path'
 
 //Functions
-import log from 'functions/log'
+import Logger from 'functions/Logger'
 import getConfigFromFile from 'functions/getConfigFromFile'
 
 //Util
@@ -17,6 +17,7 @@ import { MinitaskConfig } from 'types/Config'
 import PluginManager from 'functions/plugins'
 import tell from 'common/utils/tell'
 
+const logger = new Logger(true, 'Log')
 
 const plugins = new PluginManager()
 
@@ -60,7 +61,7 @@ const saveIssueToFile: SaveIssueToFileFunction = async (_path: string, issue: Is
 
 
 export const handler = async (argv: args) => {
-    log(argv)
+    logger.log(argv, 'data')
 
     await plugins.init()
     await plugins.loadModules()

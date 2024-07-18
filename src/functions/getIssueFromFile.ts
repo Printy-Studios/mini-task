@@ -5,17 +5,19 @@ import { Issue } from 'types/Issue'
 import * as yamlFront from 'yaml-front-matter'
 
 import getConfigFromFile from './getConfigFromFile'
-import log from './log'
+import Logger from './Logger'
+
+const logger = new Logger(true, 'Log')
 
 export default async function getIssueFromFile(filename: string, custom_dir: string = null) {
 
-    log('Getting issue from file ' + filename)
+    logger.log('Getting issue from file ' + filename)
 
     let target_path = custom_dir
 
     //Only load config file if needed, to save resources
     if( !target_path ) {
-        log('Target path not specified, getting one from minitask config')
+        logger.log('Target path not specified, getting one from minitask config')
         const config = await getConfigFromFile()
 
         if (!config) {
@@ -23,7 +25,7 @@ export default async function getIssueFromFile(filename: string, custom_dir: str
         }
 
         target_path = config['issues-path']
-        log('Target path: ' + target_path)
+        logger.log('Target path: ' + target_path)
     }
     
 

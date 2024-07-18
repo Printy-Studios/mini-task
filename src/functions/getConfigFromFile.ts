@@ -6,13 +6,15 @@ import { MinitaskConfig } from 'types/Config'
 import { minitask_config_schema } from 'constants/schema'
 
 //Util
-import log from './log'
+import Logger from './Logger'
 
 //Types
 import { JSONSchemaEntryResponse } from 'enums/JSONSchema'
 
 //Functions
 import JSONValidator from './JSONValidator'
+
+const logger = new Logger(true, 'Log')
 
 export default async function getConfigFromFile() {
 
@@ -30,11 +32,11 @@ export default async function getConfigFromFile() {
     if ( config_file_js ) {
         config = (await import(path.join(config_file_js.path, 'minitask.js'))).default
         file_path = config_file_js.path
-        log('Found minitask.js config file at ' + file_path)
+        logger.log('Found minitask.js config file at ' + file_path)
     } else if (config_file_json) {
         config = JSON.parse(config_file_json.str)
         file_path = config_file_json.path
-        log('Found minitask.json config file at ' + file_path)
+        logger.log('Found minitask.json config file at ' + file_path)
     } else {
         // return null
         throw new Error('Could not find minitask config file')
@@ -42,7 +44,7 @@ export default async function getConfigFromFile() {
 
 
     //Validate config schema
-    log('Validating config schema')
+    logger.log('Validating config schema')
 
     const validator = new JSONValidator()
 
