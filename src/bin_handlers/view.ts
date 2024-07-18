@@ -1,7 +1,8 @@
 //Functions
 import printIssue from 'functions/printIssue'
-import PluginManager from 'functions/plugins'
+import plugins from 'functions/plugins'
 import getIssueFromFile from 'functions/getIssueFromFile'
+
 
 //Types
 import { IssueParsers, IssueRenderers, ParseIssueDescriptionFunction } from 'types/Plugin'
@@ -21,11 +22,6 @@ type Args = {
 }
 
 export const handler = async (argv: Args) => {
-
-    const plugins = new PluginManager()
-
-    await plugins.init()
-    await plugins.loadModules()
 
     //plugins.loadConstants #TODO
 

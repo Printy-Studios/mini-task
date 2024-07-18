@@ -215,4 +215,6 @@ class PluginManager {
     }
 }
 
-export default PluginManager
+const plugins = new PluginManager();
+
+export default plugins;

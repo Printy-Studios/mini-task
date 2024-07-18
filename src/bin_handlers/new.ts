@@ -5,6 +5,7 @@ import * as path from 'path'
 //Functions
 import Logger from 'functions/Logger'
 import getConfigFromFile from 'functions/getConfigFromFile'
+import plugins from 'functions/plugins'
 
 //Util
 import findFileUp from 'utils/findFileUp'
@@ -18,8 +19,6 @@ import PluginManager from 'functions/plugins'
 import tell from 'common/utils/tell'
 
 const logger = new Logger(true, 'Log')
-
-const plugins = new PluginManager()
 
 export const command = 'new [name]'
 
@@ -62,9 +61,6 @@ const saveIssueToFile: SaveIssueToFileFunction = async (_path: string, issue: Is
 
 export const handler = async (argv: args) => {
     logger.log(argv, 'data')
-
-    await plugins.init()
-    await plugins.loadModules()
 
     if (!argv.name) {
         tell('No name specified, running minitask in interactive mode(TODO)')
