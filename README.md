@@ -234,9 +234,10 @@ That's the basic gist of it. You can visit [the Plugins API](#) for reference of
 
 ## Project development
 
+### Setup
+
 If you want to work on the project: 
  1. Clone the repo
  2. run `npm install` to install dependencies
+ 3. run `npm run build` to build project
  3. run `npm run minitask` to build and run minitask
- 4. ??
- 5. Profit
