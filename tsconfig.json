@@ -3,12 +3,13 @@
         "esModuleInterop": true,
         "sourceMap": true,
         "baseUrl": "./src",
+        "moduleResolution": "NodeNext",
         "paths": {
             "*": [ "./*" ],
             "common/*": [ "../common/*" ]
         },
         "outDir": "./dist",
-        "module": "ES2022",
+        "module": "NodeNext",
         "target": "ES2017"
     },
     "include": ["plugins", "src", "common"]
