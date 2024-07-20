@@ -10,7 +10,7 @@ const logger = new Logger(true, 'Log');
  * 
  * @returns { string } customPath if it is defined, otherwise default issues-path
  */
-export default async function customPathOrDefault(customPath: string) {
+export default function customPathOrDefault(customPath: string) {
     if( !customPath ) {
         logger.log('Target path not specified, getting one from minitask config');
         const config = getConfigFromFile();
