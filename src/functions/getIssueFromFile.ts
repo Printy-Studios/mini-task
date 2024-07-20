@@ -6,30 +6,23 @@ import * as yamlFront from 'yaml-front-matter'
 
 import getConfigFromFile from './getConfigFromFile'
 import Logger from './Logger'
+import customPathOrDefault from './customPathOrDefault'
 
 const logger = new Logger(true, 'Log')
 
-export default async function getIssueFromFile(filename: string, custom_dir: string = null) {
+/**
+ * Parse issue from given file
+ * 
+ * @param filename file name of issue
+ * @param custom_dir (optional) custom directory. If not specified, issues-path specified in config is used
+ * 
+ * @returns { Issue } 
+ */
+export default async function getIssueFromFile(filename: string, custom_dir: string = null): Promise<Issue> {
 
     logger.log('Getting issue from file ' + filename)
 
-    let target_path = custom_dir
-
-    //Only load config file if needed, to save resources
-    if( !target_path ) {
-        logger.log('Target path not specified, getting one from minitask config')
-        const config = await getConfigFromFile()
-
-        if (!config) {
-            throw new Error('Could not find minitask config')
-        }
-
-        target_path = config['issues-path']
-        logger.log('Target path: ' + target_path)
-    }
-    
-
-    
+    let target_path = await customPathOrDefault(custom_dir);    
     
     const issue_str = fs.readFileSync(path.join(target_path, filename), { encoding: 'utf-8'})
 
