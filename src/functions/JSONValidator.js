@@ -1,25 +1,12 @@
-//Types
-import { 
-    JSONSchemas, 
-    JSONSchema,
-    JSONSchemaEntry,
-    JSONSchemaResponseWithStop
-} from 'types/JSONSchema'
-
-import {
-    JSONSchemaEntryResponse
-} from 'enums/JSONSchema'
-
-
 export default class JSONValidator {
-    object_types: JSONSchemas = {}
+    object_types = {}
 
-    addObjectType = (type_name: string, object_type: JSONSchema) => {
+    addObjectType = (type_name, object_type) => {
         this.object_types[type_name] = object_type
     }
 
-    validateSingle(entry: any, schema_entry: JSONSchemaEntry): JSONSchemaEntryResponse {
-        const err_response: JSONSchemaEntryResponse[] = []
+    validateSingle(entry, schema_entry) {
+        const err_response = []
 
         if (!schema_entry) {
             return JSONSchemaEntryResponse.UNSPECIFIED
@@ -44,9 +31,7 @@ export default class JSONValidator {
      * @param { boolean } [stop=false] Whether to stop validation at first error
      * @returns 
      */
-    validate = (obj: object, schema: JSONSchema, stop = true):
-        JSONSchemaResponseWithStop |
-        JSONSchemaEntryResponse.SUCCESS => {
+    validate = (obj, schema, stop = true) => {
 
         for(const key in schema) {
             if(schema[key].required && !(key in obj)) {

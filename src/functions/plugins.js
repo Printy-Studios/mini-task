@@ -1,18 +1,13 @@
-import * as fs from 'fs'
-import * as path from 'path'
-import Logger from './Logger'
-import { 
-    PluginMetadata, 
-    PluginFunctions, 
-    PluginModule,
-    Plugin,
-    PluginConstants,
-    PluginExport
- } from 'types/Plugin'
-import { MinitaskConfig, MinitaskConfigPlugin } from 'types/Config'
-import getConfigFromFile from './getConfigFromFile'
+import * as fs from 'fs';
+import * as path from 'path';
+import url from 'url';
+import Logger from './Logger.js'
+import getConfigFromFile from './getConfigFromFile.js'
 
 const logger = new Logger(true, 'Log')
+
+
+const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
 const plugins_dir = path.join(__dirname, '../../plugins')
 
@@ -26,7 +21,7 @@ const plugins_dir = path.join(__dirname, '../../plugins')
  * 
  * @returns {string[] | true} an array with missing keys, true if all keys present
  */
-const hasKeys = (obj: object, keys: string[]): string[] | true => {
+const hasKeys = (obj, keys) => {
     const missing_keys = []
     for (const key of keys) {
         if(!(key in obj)) {
@@ -37,7 +32,7 @@ const hasKeys = (obj: object, keys: string[]): string[] | true => {
     return missing_keys.length === 0 ? true : missing_keys
 }
 
-const parsePluginIndex = (plugin_folder_path: string): PluginMetadata => {
+const parsePluginIndex = (plugin_folder_path) => {
 
     const index_json_path = path.join(plugin_folder_path, 'index.json')
 
@@ -49,7 +44,7 @@ const parsePluginIndex = (plugin_folder_path: string): PluginMetadata => {
 
     const index_json_str = fs.readFileSync(index_json_path, {encoding: 'utf-8'})
 
-    const metadata: PluginMetadata = JSON.parse(index_json_str)
+    const metadata = JSON.parse(index_json_str)
 
     if(!('id' in metadata)) {
         throw new Error('id property not found in ' + index_json_path)
@@ -72,16 +67,14 @@ const parsePluginIndex = (plugin_folder_path: string): PluginMetadata => {
 
 
 class PluginManager {
-    plugins: {
-        [plugin_id: string]: PluginMetadata   
-    } = {}
-    functions: PluginFunctions = {
+    plugins = {}
+    functions = {
         parseIssueDescription: []
     }
-    constants: PluginConstants = {}
-    functions_loaded: boolean = false
+    constants = {}
+    functions_loaded = false
 
-    minitask_config: MinitaskConfig
+    minitask_config
 
     /**
      * Empty constructor. Must call init() method before using this class(need to use
@@ -91,7 +84,7 @@ class PluginManager {
         
     }
 
-    async init(minitask_config?: MinitaskConfig) {
+    async init(minitask_config) {
         logger.log('Constructing a PluginManager instance')
         if(!minitask_config) {
             this.minitask_config = await getConfigFromFile()
@@ -104,7 +97,7 @@ class PluginManager {
 
         const plugin_folder_names = fs.readdirSync(plugins_dir)
 
-        const isPluginEnabled = (plugin: MinitaskConfigPlugin) => {
+        const isPluginEnabled = (plugin) => {
             return (
                 (
                     typeof plugin === 'object' &&
@@ -144,7 +137,7 @@ class PluginManager {
         }
     }
 
-    getPluginMeta = (plugin_id: string) => {
+    getPluginMeta = (plugin_id) => {
         return this.plugins[plugin_id]
     }
 
@@ -157,7 +150,7 @@ class PluginManager {
      * @returns { null | _exports } null or list of exports that were missing if there were any.
      * Throws error if there are conficts with existing loaded exports
      */
-    loadPluginModuleExports = (plugin_exports: PluginExport, loadonto: PluginExport) => {
+    loadPluginModuleExports = (plugin_exports, loadonto) => {
         for(const export_name in plugin_exports) {
             if (Array.isArray(loadonto[export_name])) {
                 loadonto[export_name].push(plugin_exports[export_name])
@@ -191,7 +184,7 @@ class PluginManager {
                 current_plugin_functions ||
                 current_plugin_constants
             ) {
-                let plugin_module: PluginModule
+                let plugin_module
                 try {
                     plugin_module = await import(path.join(current_plugin.plugin_path, 'index.js'))
                 } catch (err) {

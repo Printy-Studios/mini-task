@@ -1,20 +1,16 @@
-import * as path from 'path'
+import * as path from 'path';
 
-import findFileUp from 'utils/findFileUp'
+import findFileUp from '#utils/findFileUp.js';
 
-import { MinitaskConfig } from 'types/Config'
-import { minitask_config_schema } from 'constants/schema'
+import { minitask_config_schema } from '#constants/schema.js';
 
 //Util
-import Logger from './Logger'
-
-//Types
-import { JSONSchemaEntryResponse } from 'enums/JSONSchema'
+import Logger from './Logger.js';
 
 //Functions
-import JSONValidator from './JSONValidator'
+import JSONValidator from './JSONValidator.js';
 
-const logger = new Logger(true, 'Log')
+const logger = new Logger(true, 'Log');
 
 /**
  * Get config from file
@@ -22,22 +18,23 @@ const logger = new Logger(true, 'Log')
  */
 export default function getConfigFromFile() {
 
-    const config_file_json = findFileUp('minitask.json', process.env.INIT_CWD, true, 5)
-    const config_file_js = findFileUp('minitask.js', process.env.INIT_CWD, false, 5)
+    const config_file_json = findFileUp('minitask.json', process.env.INIT_CWD, true, 5);
+    const config_file_js = findFileUp('minitask.js', process.env.INIT_CWD, false, 5);
 
 
-    let file_path: string
-    let config: MinitaskConfig
+    let file_path;
+    let config;
 
     /* 
-    Load either .js or .json, whichever is found(.js checked first). 
-    Throw error if neither are found 
+        Load either .js or .json, whichever is found(.js checked first). 
+        Throw error if neither are found 
     */
     if ( config_file_js ) {
         throw new Error('For now .js config is not supported, please use .json');
         /* 
-         config = (await import(path.join(config_file_js.path, 'minitask.js'))).default
-        Need a different approach that doens't use await so we don't have to make all dependant functions async*/
+            config = (await import(path.join(config_file_js.path, 'minitask.js'))).default
+            Need a different approach that doens't use await so we don't have to make all dependant functions async
+        */
         file_path = config_file_js.path
         logger.log('Found minitask.js config file at ' + file_path)
     } else if (config_file_json) {

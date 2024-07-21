@@ -8,8 +8,8 @@ import * as path from 'path'
  * @param limit 
  * @returns 
  */
-export default function findFileUp(filename: string, start_dir: string, return_contents = false, limit = 5, ) {
-    let current_dir = (start_dir || process.env.INIT_CWD)!
+export default function findFileUp(filename, start_dir, return_contents = false, limit = 5) {
+    let current_dir = (start_dir || process.env.INIT_CWD);
 
     let times_tried = 0
 

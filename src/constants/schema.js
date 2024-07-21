@@ -1,6 +1,4 @@
-import { JSONSchema } from 'types/JSONSchema'
-
-export const minitask_config_plugins_schema: JSONSchema = {
+export const minitask_config_plugins_schema = {
     "enabled": {
         "required": true,
         "type": ["boolean"]
@@ -11,7 +9,7 @@ export const minitask_config_plugins_schema: JSONSchema = {
     }
 }
 
-export const minitask_config_schema: JSONSchema = {
+export const minitask_config_schema = {
     "issues-path": {
         "required": true,
         "type": "string"

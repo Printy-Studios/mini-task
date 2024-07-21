@@ -1,25 +1,23 @@
 import chalk from 'chalk'
 
-export type LogFilter = string[] | string | null
-
 export default class Logger {
 
-    enabled: boolean = true
-    prefix: string
-    filter: string[] | string = 'info'
+    enabled = true;
+    prefix;
+    filter= 'info';
 
-    constructor(enabled: boolean = true, prefix: string = 'Log') {
+    constructor(enabled = true, prefix = 'Log') {
         this.enabled = enabled
         this.prefix = prefix
     }
 
-    log(args: any[] | any, type: string = 'info') {
+    log(args, type = 'info') {
         if (this.enabled && Logger.filtersMatch(this.filter, type)) {
             console.log(this.prefix ? (chalk.whiteBright(this.prefix + ': ')) : null, typeof args === 'string' ? args : [...args])
         }
     }
 
-    static filtersMatch(filter1: LogFilter, filter2: LogFilter) {
+    static filtersMatch(filter1, filter2) {
         if( Array.isArray(filter1) ) {
             if( Array.isArray(filter2) ) {
                 return filter1.findIndex(type => filter2.includes(type)) > -1

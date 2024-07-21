@@ -3,26 +3,17 @@
   "version": "0.0.1",
   "description": "File based issue tracker CLI",
   "main": "dist/src/index.js",
+  "type": "module",
   "scripts": {
-    "clean": "rimraf /dist",
-    "copy-files": "copyfiles -u 1 src/**/*.json dist/ && copyfiles -u 1 plugins/**/*.json dist/plugins",
-    "build": "npm run clean && tsc && npm run copy-files",
-    "minitask": "node --enable-source-maps dist/src/bin/minitask.js",
-    "minitask-b": "npm run build && npm run minitask",
+    "minitask": "node --enable-source-maps src/bin/minitask.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Printy-Studios/mini-task.git"
   },
-  "_moduleAliases": {
-    "bin_handlers": "./dist/src/bin_handlers",
-    "bin": "./dist/src/bin",
-    "functions": "./dist/src/functions",
-    "utils": "./dist/src/utils",
-    "constants": "./dist/src/constants",
-    "enums": "./dist/src/enums",
-    "common": "./dist/common"
+  "imports": {
+    "#*": "./src/*"
   },
   "keywords": [
     "issue",
@@ -38,21 +29,11 @@
     "url": "https://github.com/Printy-Studios/mini-task/issues"
   },
   "homepage": "https://github.com/Printy-Studios/mini-task#readme",
-  "devDependencies": {
-    "@types/chalk": "^2.2.0",
-    "@types/marked-terminal": "^3.1.4",
-    "@types/node": "^20.6.2",
-    "copyfiles": "^2.4.1",
-    "rimraf": "^5.0.1",
-    "typescript": "^5.2.2"
-  },
   "dependencies": {
-    "@types/yargs": "^17.0.24",
     "chalk": "^4.1.2",
     "enquirer": "^2.4.1",
     "marked": "^5.1.2",
     "marked-terminal": "^5.2.0",
-    "module-alias": "^2.2.3",
     "yaml-front-matter": "^4.1.1",
     "yargs": "^17.7.2"
   }
