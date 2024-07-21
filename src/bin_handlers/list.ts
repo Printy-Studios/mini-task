@@ -1,3 +1,6 @@
+import listIssues from 'functions/listIssues';
+import printIssueList from 'functions/print/printIssueList';
+
 /**
  * List all tasks
  */
@@ -8,5 +11,6 @@ type Args = {
 }
 
 export const handler = (argv: Args) => {
-
+    const allIssues = listIssues();
+    printIssueList(allIssues);
 }

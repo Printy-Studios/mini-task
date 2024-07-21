@@ -10,7 +10,9 @@ import {
     PluginExport
  } from 'types/Plugin'
 import { MinitaskConfig, MinitaskConfigPlugin } from 'types/Config'
-import getConfigFromFile from './getConfigFromFile'
+
+// Constants
+import config from 'constants/config'
 
 const logger = new Logger(true, 'Log')
 
@@ -91,10 +93,10 @@ class PluginManager {
         
     }
 
-    async init(minitask_config?: MinitaskConfig) {
+    init(minitask_config?: MinitaskConfig) {
         logger.log('Constructing a PluginManager instance')
         if(!minitask_config) {
-            this.minitask_config = await getConfigFromFile()
+            this.minitask_config = config;
         }
 
         if (!this.minitask_config.plugins) {

@@ -20,32 +20,27 @@ const logger = new Logger(true, 'Log')
  * Get config from file
  * @returns 
  */
-export default function getConfigFromFile() {
+export default async function getConfigFromFile() {
 
-    const config_file_json = findFileUp('minitask.json', process.env.INIT_CWD, true, 5)
+    //const config_file_json = findFileUp('minitask.json', process.env.INIT_CWD, true, 5)
     const config_file_js = findFileUp('minitask.js', process.env.INIT_CWD, false, 5)
 
 
     let file_path: string
     let config: MinitaskConfig
 
-    /* 
-    Load either .js or .json, whichever is found(.js checked first). 
-    Throw error if neither are found 
-    */
     if ( config_file_js ) {
-        throw new Error('For now .js config is not supported, please use .json');
-        /* 
-         config = (await import(path.join(config_file_js.path, 'minitask.js'))).default
-        Need a different approach that doens't use await so we don't have to make all dependant functions async*/
+        logger.log('Importing config from ' + config_file_js.path);
+        // console.log('importing:', config_file_js.path);
+        config = (await import(path.join(config_file_js.path, 'minitask.js'))).default
+        console.log('imported')
         file_path = config_file_js.path
         logger.log('Found minitask.js config file at ' + file_path)
-    } else if (config_file_json) {
-        config = JSON.parse(config_file_json.str)
-        file_path = config_file_json.path
-        logger.log('Found minitask.json config file at ' + file_path)
     } else {
-        // return null
+        //.json config is deprecated
+        //config = JSON.parse(config_file_json.str)
+        //file_path = config_file_json.path
+        //logger.log('Found minitask.json config file at ' + file_path)
         throw new Error('Could not find minitask config file')
     }
 

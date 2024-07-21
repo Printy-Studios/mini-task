@@ -4,7 +4,6 @@ import * as path from 'path'
 import { Issue } from 'types/Issue'
 import * as yamlFront from 'yaml-front-matter'
 
-import getConfigFromFile from './getConfigFromFile'
 import Logger from './Logger'
 import customPathOrDefault from './customPathOrDefault'
 

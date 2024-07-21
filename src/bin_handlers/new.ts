@@ -4,7 +4,6 @@ import * as path from 'path'
 
 //Functions
 import Logger from 'functions/Logger'
-import getConfigFromFile from 'functions/getConfigFromFile'
 import plugins from 'functions/plugins'
 
 //Util
@@ -14,6 +13,9 @@ import findFileUp from 'utils/findFileUp'
 import { Issue } from 'types/Issue'
 import { SaveIssueToFileFunction } from 'types/Plugin'
 import { MinitaskConfig } from 'types/Config'
+
+// Constants 
+import config from 'constants/config'
 
 import PluginManager from 'functions/plugins'
 import tell from 'common/utils/tell'
@@ -73,8 +75,6 @@ export const handler = async (argv: args) => {
             id: argv.id || slugify(argv.name)
         }
     }
-
-    const config = await getConfigFromFile()
 
     if (!config) {
         tell('Could not find minitask.json')

@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "File based issue tracker CLI",
   "main": "dist/src/index.js",
+  "type": "module",
   "scripts": {
     "clean": "rimraf /dist",
     "copy-files": "copyfiles -u 1 src/**/*.json dist/ && copyfiles -u 1 plugins/**/*.json dist/plugins",
