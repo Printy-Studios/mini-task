@@ -1,3 +1,9 @@
+export const JSONSchemaEntryResponse = {
+    SUCCESS: 1,
+    REQUIRED: 2,
+    UNSPECIFIED: 3,
+}
+
 export default class JSONValidator {
     object_types = {}
 

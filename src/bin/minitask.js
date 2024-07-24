@@ -1,16 +1,20 @@
-//Core
-import * as yargs from 'yargs'
+// Core
+import yargs from 'yargs'
 
 // Functions
 import plugins from '#functions/plugins.js';
+
+// Commands
+import commands from '#bin_handlers/index.js';
 
 // Initialize plugins
 await plugins.init();
 await plugins.loadModules();
 
-const args = yargs
+
+const args = yargs(hideBin(process.argv))
     .strict()
-    .commandDir('../bin_handlers', { exclude: /index.(js|ts)/})//addCommands(yargs, commands).argv
+    .command(commands)//addCommands(yargs, commands).argv
     .parse();
 
 

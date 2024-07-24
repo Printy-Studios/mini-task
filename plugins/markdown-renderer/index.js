@@ -1,24 +1,19 @@
 //Core
 import * as marked from 'marked'
-import MDRenderer, { TerminalRendererOptions } from 'marked-terminal'
+import MDRenderer from 'marked-terminal'
 
-MDRenderer
-
-//Types
-import { Config } from './types/Config'
-
-let config: Config = {
+let config = {
 
 }
 
-function parseIssueDescription(description: string) {
+function parseIssueDescription(description) {
     description = marked.parse(description)
 
     return description
 
 }
 
-function setConfig(_config: Config) {
+function setConfig(_config) {
     console.log('Getting config from Markdown Renderer plugin: ', config)
     marked.setOptions({
         mangle: false,

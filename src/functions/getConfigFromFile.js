@@ -1,4 +1,5 @@
 import * as path from 'path';
+import url from 'url';
 
 import findFileUp from '#utils/findFileUp.js';
 
@@ -8,7 +9,7 @@ import { minitask_config_schema } from '#constants/schema.js';
 import Logger from './Logger.js';
 
 //Functions
-import JSONValidator from './JSONValidator.js';
+import JSONValidator, { JSONSchemaEntryResponse } from './JSONValidator.js';
 
 const logger = new Logger(true, 'Log');
 
@@ -16,7 +17,7 @@ const logger = new Logger(true, 'Log');
  * Get config from file
  * @returns 
  */
-export default function getConfigFromFile() {
+export default async function getConfigFromFile() {
 
     const config_file_json = findFileUp('minitask.json', process.env.INIT_CWD, true, 5);
     const config_file_js = findFileUp('minitask.js', process.env.INIT_CWD, false, 5);
@@ -30,11 +31,7 @@ export default function getConfigFromFile() {
         Throw error if neither are found 
     */
     if ( config_file_js ) {
-        throw new Error('For now .js config is not supported, please use .json');
-        /* 
-            config = (await import(path.join(config_file_js.path, 'minitask.js'))).default
-            Need a different approach that doens't use await so we don't have to make all dependant functions async
-        */
+        config = (await import(url.pathToFileURL(path.join(config_file_js.path, 'minitask.js')))).default
         file_path = config_file_js.path
         logger.log('Found minitask.js config file at ' + file_path)
     } else if (config_file_json) {

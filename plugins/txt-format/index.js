@@ -1,9 +1,7 @@
 import * as fs from 'fs'
 import * as path from 'path'
 
-import { Issue } from 'types/Issue'
-
-async function saveIssueToFile (_path: string, issue: Issue) {
+async function saveIssueToFile (_path, issue) {
 
     //String to be written to file
     let output_str = 'My custom file format!\n'

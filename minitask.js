@@ -1,6 +1,6 @@
-const chalk = require('chalk');
+import chalk from 'chalk';
 
-module.exports = {
+export default {
     "issues-path": "issues",
     "plugins": {
         "txt-format": true,

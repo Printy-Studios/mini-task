@@ -186,7 +186,7 @@ class PluginManager {
             ) {
                 let plugin_module
                 try {
-                    plugin_module = await import(path.join(current_plugin.plugin_path, 'index.js'))
+                    plugin_module = await import(url.pathToFileURL(path.join(current_plugin.plugin_path, 'index.js')))
                 } catch (err) {
                     throw new Error('An error occured while loading plugin ' + current_plugin.id + ': ' + err)
                 }
