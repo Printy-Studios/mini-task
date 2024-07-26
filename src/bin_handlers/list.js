@@ -3,10 +3,6 @@
  */
 export const command = 'list';
 
-type Args = {
-
-}
-
-export const handler = (argv: Args) => {
+export const handler = (argv) => {
 
 }

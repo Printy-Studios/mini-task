@@ -1,5 +1,6 @@
 // Core
 import yargs from 'yargs'
+import { hideBin } from 'yargs/helpers';
 
 // Functions
 import plugins from '#functions/plugins.js';

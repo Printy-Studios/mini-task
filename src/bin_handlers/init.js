@@ -1,8 +1,8 @@
-import * as fs from 'fs'
-import * as path from 'path'
-import findFileUp from 'utils/findFileUp'
+import * as fs from 'fs';
+import * as path from 'path';
+import findFileUp from '#utils/findFileUp.js';
 
-import Logger from 'functions/Logger'
+import Logger from '#functions/Logger.js';
 
 const logger = new Logger(true, 'Log')
 
@@ -14,7 +14,7 @@ export const command = 'init'
  * @param {string}  target_folder path to folder where to initialize minitask folder
  * @param {boolean} overwrite whether to overwrite folder if it already exists
  */
-const initForUser = (target_folder: string, overwrite = false) => {
+const initForUser = (target_folder, overwrite = false) => {
     target_folder = path.join(target_folder, 'minitask')
     const path_exists = fs.existsSync(target_folder)
     if(path_exists && !overwrite) {
@@ -26,7 +26,7 @@ const initForUser = (target_folder: string, overwrite = false) => {
     //fs.mkdirSync(target_folder, )
 }
 
-const findLocalNodeModulesFolder = (search_from_path: string) => {
+const findLocalNodeModulesFolder = (search_from_path) => {
     const package_json_path = findFileUp('package.json', search_from_path, false, 5).path
     const node_modules_path = path.join(package_json_path, 'node_modules')
     const node_module_folder_exists = fs.existsSync(node_modules_path)

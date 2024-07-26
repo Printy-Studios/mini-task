@@ -2,38 +2,38 @@
 import chalk from 'chalk'
 
 //Types
-import { IssueParsers, IssueRenderers } from 'types/Plugin'
-import { 
-    Issue, 
-    IssuePriority, 
-    IssueStatus 
-} from 'types/Issue'
+// import { IssueParsers, IssueRenderers } from 'types/Plugin'
+// import { 
+//     Issue, 
+//     IssuePriority, 
+//     IssueStatus 
+//} from 'types/Issue'
 
 //Util
-import tell from 'common/utils/tell'
-import { conditionalBg, conditionalColor } from 'utils/conditionalChalk'
+import tell from '../../common/utils/tell.js'
+import { conditionalBg, conditionalColor } from '#utils/conditionalChalk.js'
 
-const printIssueID = (id: string) => {
+const printIssueID = (id) => {
     tell(chalk.italic.whiteBright(id))
 }
 
-const printIssueName = (name: string) => {
+const printIssueName = (name) => {
     tell(chalk.yellow.underline.bold(name))
 }
 
-const printIssueStatus = (status: IssueStatus) => {
+const printIssueStatus = (status) => {
     const str = (status ? status.label || status.value : '-')
     
     tell("Status: " + conditionalBg(status?.bgColor)(conditionalColor(status?.color)(str)))
 }
 
-const printIssuePriority = (priority: IssuePriority) => {
+const printIssuePriority = (priority) => {
     const str = (priority ? priority.label || priority.value : '-')
 
     tell("Priority: " + conditionalBg(priority?.bgColor)(conditionalColor(priority?.color)(str)))
 }
 
-export default function printIssue(issue: Issue, renderers: IssueRenderers, parsers: IssueParsers) {
+export default function printIssue(issue, renderers, parsers) {
     printIssueID(issue.metadata.id) //Pluggable
     tell('')
     printIssueName(issue.name) //Pluggable

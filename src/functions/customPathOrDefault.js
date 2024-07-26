@@ -1,6 +1,6 @@
 // Util
-import Logger from './Logger';
-import getConfigFromFile from './getConfigFromFile';
+import Logger from './Logger.js';
+import getConfigFromFile from './getConfigFromFile.js';
 
 const logger = new Logger(true, 'Log');
 
@@ -10,16 +10,18 @@ const logger = new Logger(true, 'Log');
  * 
  * @returns { string } customPath if it is defined, otherwise default issues-path
  */
-export default function customPathOrDefault(customPath: string) {
+export default function customPathOrDefault(customPath) {
     if( !customPath ) {
         logger.log('Target path not specified, getting one from minitask config');
         const config = getConfigFromFile();
+
+        console.log('config: ', config);
 
         if (!config) {
             throw new Error('Could not find minitask config');
         }
 
-        logger.log('Target path: ' + customPath);
+        logger.log('Target path: ' + config['issues-path']);
         return config['issues-path'];
     }
 

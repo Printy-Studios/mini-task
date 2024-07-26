@@ -1,12 +1,10 @@
 //Core
 import * as fs from 'fs'
 import * as path from 'path'
-import { Issue } from 'types/Issue'
 import * as yamlFront from 'yaml-front-matter'
 
-import getConfigFromFile from './getConfigFromFile'
-import Logger from './Logger'
-import customPathOrDefault from './customPathOrDefault'
+import Logger from './Logger.js'
+import customPathOrDefault from './customPathOrDefault.js'
 
 const logger = new Logger(true, 'Log')
 
@@ -18,7 +16,7 @@ const logger = new Logger(true, 'Log')
  * 
  * @returns { Issue } 
  */
-export default async function getIssueFromFile(filename: string, custom_dir: string = null): Promise<Issue> {
+export default async function getIssueFromFile(filename, custom_dir = null) {
 
     logger.log('Getting issue from file ' + filename)
 
@@ -28,12 +26,12 @@ export default async function getIssueFromFile(filename: string, custom_dir: str
 
     const issue_raw_json = yamlFront.safeLoadFront(issue_str, { contentKeyName: 'description'})
 
-    let name:string = (issue_raw_json.description as string).match(/# .*(\r\n|\r|\n)/g)[0]
+    let name = (issue_raw_json.description).match(/# .*(\r\n|\r|\n)/g)[0]
     name = name.replace(/(\r\n|\r|\n)/, '')
 
     issue_raw_json.description = issue_raw_json.description.replace(/# .*(\r\n|\r|\n)/, '')
 
-    const issue: Issue = {
+    const issue = {
         name: name,
         description: issue_raw_json.description,
         metadata: {

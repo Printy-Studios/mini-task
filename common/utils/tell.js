@@ -4,6 +4,6 @@
  * debug cleanup
  * @param {...any} args stuff to output 
  */
-export default function tell(...args: any) {
+export default function tell(...args) {
     console.log(...args)
 } 

@@ -3,37 +3,21 @@ import * as fs from 'fs'
 import * as path from 'path'
 
 //Functions
-import Logger from 'functions/Logger'
-import getConfigFromFile from 'functions/getConfigFromFile'
-import plugins from 'functions/plugins'
+import Logger from '#functions/Logger.js'
+import getConfigFromFile from '#functions/getConfigFromFile.js'
+import plugins from '#functions/plugins.js'
 
-//Util
-import findFileUp from 'utils/findFileUp'
-
-//Types
-import { Issue } from 'types/Issue'
-import { SaveIssueToFileFunction } from 'types/Plugin'
-import { MinitaskConfig } from 'types/Config'
-
-import PluginManager from 'functions/plugins'
-import tell from 'common/utils/tell'
+import tell from '../../common/utils/tell.js'
 
 const logger = new Logger(true, 'Log')
 
-export const command = 'new [name]'
+export const command = 'new [name]';
 
-type args = Omit<Issue, 'name'> & {
-    name?: string,
-    id?: string
-}
-
-
-
-const slugify = (str: string) => {
+const slugify = (str) => {
     return str.replace(/\s+/g, '-').toLowerCase();
 }
 
-const saveIssueToFile: SaveIssueToFileFunction = async (_path: string, issue: Issue) => {
+const saveIssueToFile = async (_path, issue) => {
 
     //String to be written to file
     let output_str = '---\n\n'
@@ -59,7 +43,7 @@ const saveIssueToFile: SaveIssueToFileFunction = async (_path: string, issue: Is
 
 
 
-export const handler = async (argv: args) => {
+export const handler = async (argv) => {
     logger.log(argv, 'data')
 
     if (!argv.name) {
@@ -67,7 +51,7 @@ export const handler = async (argv: args) => {
         return
     }
 
-    const new_issue: Issue = {
+    const new_issue = {
         name: argv.name,
         metadata: {
             id: argv.id || slugify(argv.name)
