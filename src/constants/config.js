@@ -1,9 +1,12 @@
-import getConfigFromFile from 'functions/getConfigFromFile';
+import getConfigFromFile from '#functions/getConfigFromFile.js';
 
-let config = null;
+let config = {};
 
 export const loadConfig = async () => {
-    config = await getConfigFromFile();
+    const _config = await getConfigFromFile();
+    for(const key in _config) {
+        config[key] = _config[key];
+    }
 }
 
 export default config;

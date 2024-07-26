@@ -2,7 +2,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 import url from 'url';
 import Logger from './Logger.js'
-import getConfigFromFile from './getConfigFromFile.js'
+import config from '#constants/config.js';
 
 const logger = new Logger(true, 'Log')
 

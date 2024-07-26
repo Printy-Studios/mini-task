@@ -31,6 +31,7 @@ export default async function getConfigFromFile() {
         Throw error if neither are found 
     */
     if ( config_file_js ) {
+        
         config = (await import(url.pathToFileURL(path.join(config_file_js.path, 'minitask.js')).href)).default
         file_path = config_file_js.path
         logger.log('Found minitask.js config file at ' + file_path)
@@ -73,5 +74,5 @@ export default async function getConfigFromFile() {
 
     config['issues-path'] = path.resolve(file_path, config['issues-path'])
 
-    return config
+    return config;
 }

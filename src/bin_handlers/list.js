@@ -6,7 +6,7 @@ import printIssueList from '#functions/print/printIssueList.js';
  */
 export const command = 'list';
 
-export const handler = (argv:) => {
+export const handler = (argv) => {
     const allIssues = listIssues();
     printIssueList(allIssues);
 }

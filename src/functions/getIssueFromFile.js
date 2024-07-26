@@ -1,7 +1,7 @@
 //Core
 import * as fs from 'fs'
 import * as path from 'path'
-import * as yamlFront from 'yaml-front-matter'
+import yamlFront from 'yaml-front-matter'
 
 import Logger from './Logger.js'
 import customPathOrDefault from './customPathOrDefault.js'
@@ -12,11 +12,11 @@ const logger = new Logger(true, 'Log')
  * Parse issue from given file
  * 
  * @param filename file name of issue
- * @param custom_dir (optional) custom directory. If not specified, issues-path specified in config is used
+ * @param { string } [custom_dir]  (optional) custom directory. If not specified, issues-path specified in config is used
  * 
  * @returns { Issue } 
  */
-export default async function getIssueFromFile(filename, custom_dir = null) {
+export default async function getIssueFromFile(filename, custom_dir) {
 
     logger.log('Getting issue from file ' + filename)
 
