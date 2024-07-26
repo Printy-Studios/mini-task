@@ -87,7 +87,7 @@ class PluginManager {
     async init(minitask_config) {
         logger.log('Constructing a PluginManager instance')
         if(!minitask_config) {
-            this.minitask_config = await getConfigFromFile()
+            this.minitask_config = config;
         }
 
         if (!this.minitask_config.plugins) {

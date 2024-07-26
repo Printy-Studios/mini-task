@@ -1,0 +1,15 @@
+{
+    "compilerOptions": {
+        "esModuleInterop": true,
+        "sourceMap": true,
+        "baseUrl": "./src",
+        "paths": {
+            "*": [ "./*" ],
+            "common/*": [ "../common/*" ]
+        },
+        "outDir": "./dist",
+        "module": "ES2020",
+        "target": "ES2020"
+    },
+    "include": ["plugins", "src", "common"]
+}

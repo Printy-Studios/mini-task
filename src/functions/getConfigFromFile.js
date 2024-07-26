@@ -31,15 +31,14 @@ export default async function getConfigFromFile() {
         Throw error if neither are found 
     */
     if ( config_file_js ) {
-        config = (await import(url.pathToFileURL(path.join(config_file_js.path, 'minitask.js')))).default
+        config = (await import(url.pathToFileURL(path.join(config_file_js.path, 'minitask.js')).href)).default
         file_path = config_file_js.path
         logger.log('Found minitask.js config file at ' + file_path)
-    } else if (config_file_json) {
-        config = JSON.parse(config_file_json.str)
-        file_path = config_file_json.path
-        logger.log('Found minitask.json config file at ' + file_path)
     } else {
-        // return null
+        //.json config is deprecated
+        //config = JSON.parse(config_file_json.str)
+        //file_path = config_file_json.path
+        //logger.log('Found minitask.json config file at ' + file_path)
         throw new Error('Could not find minitask config file')
     }
 

@@ -13,7 +13,6 @@ const logger = new Logger(true, 'Log');
 export default function customPathOrDefault(customPath) {
     if( !customPath ) {
         logger.log('Target path not specified, getting one from minitask config');
-        const config = getConfigFromFile();
 
         console.log('config: ', config);
 

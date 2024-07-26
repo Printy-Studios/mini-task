@@ -58,8 +58,6 @@ export const handler = async (argv) => {
         }
     }
 
-    const config = await getConfigFromFile()
-
     if (!config) {
         tell('Could not find minitask.json')
         return
