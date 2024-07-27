@@ -4,11 +4,11 @@ This document describes the tasks that must be done for this project (ironic, is
 
 # Todo
 
-## Load config during minitask init so that .js config can be used
-
-## Deprecate .json config and allow only for .js config - because you can't use chalk in .json (for markdown rendere plugin)
-
 # Completed
+
+## ~~Load config during minitask init so that .js config can be used~~
+
+## ~~Deprecate .json config and allow only for .js config - because you can't use chalk in .json (for markdown renderer plugin)~~
 
 ## ~~Create `Logger` class and replace `log()` with it~~
 

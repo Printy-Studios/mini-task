@@ -13,7 +13,6 @@ import commands from '#bin_handlers/index.js';
 
 // Initialize plugins
 await loadConfig();
-console.log('config: ', config);
 await plugins.init();
 await plugins.loadModules();
 

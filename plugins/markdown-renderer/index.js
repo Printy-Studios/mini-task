@@ -14,8 +14,9 @@ function parseIssueDescription(description) {
 }
 
 function setConfig(_config) {
-    console.log('Getting config from Markdown Renderer plugin: ', config)
+    //console.log('Getting config from Markdown Renderer plugin: ', config)
     marked.setOptions({
+        /** @ts-ignore */
         mangle: false,
         headerIds: false,
         renderer: new MDRenderer(

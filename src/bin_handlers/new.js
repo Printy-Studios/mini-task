@@ -4,10 +4,13 @@ import * as path from 'path'
 
 //Functions
 import Logger from '#functions/Logger.js'
-import getConfigFromFile from '#functions/getConfigFromFile.js'
 import plugins from '#functions/plugins.js'
 
+//Utils
 import tell from '../../common/utils/tell.js'
+
+//Constants
+import config from '#constants/config.js'
 
 const logger = new Logger(true, 'Log')
 
@@ -59,7 +62,7 @@ export const handler = async (argv) => {
     }
 
     if (!config) {
-        tell('Could not find minitask.json')
+        tell('Could not find minitask config file')
         return
     }
 
