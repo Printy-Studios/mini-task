@@ -33,7 +33,7 @@ const saveIssueToFile = async (_path, issue) => {
     output_str += '\n---\n\n'
 
     //Add title
-    output_str += '# ' + issue.name + '\n'
+    output_str += '# ' + issue.name + '\n\n'
 
     //Add description
     output_str += issue.description || ''
