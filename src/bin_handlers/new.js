@@ -14,7 +14,7 @@ import config from '#constants/config.js'
 
 const logger = new Logger(true, 'Log')
 
-export const command = 'new [name]';
+export const command = 'new <name> [description]';
 
 const slugify = (str) => {
     return str.replace(/\s+/g, '-').toLowerCase();
@@ -56,6 +56,7 @@ export const handler = async (argv) => {
 
     const new_issue = {
         name: argv.name,
+        description: argv.description,
         metadata: {
             id: argv.id || slugify(argv.name)
         }
