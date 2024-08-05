@@ -1,3 +1,10 @@
+/**
+ * JSON Schemas
+ */
+
+/**
+ * Plugin configuration schema
+ */
 export const minitask_config_plugins_schema = {
     "enabled": {
         "required": true,
@@ -9,6 +16,9 @@ export const minitask_config_plugins_schema = {
     }
 }
 
+/**
+ * Minitask configuration schema
+ */
 export const minitask_config_schema = {
     "issues-path": {
         "required": true,

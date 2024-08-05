@@ -8,7 +8,7 @@ const logger = new Logger(true, 'Log');
 
 /**
  * Returns customPath that is provided if it's a string, otherwise returns the default issues-path from config
- * @param { string } customPath - optional custom path.
+ * @param { string } [customPath] - optional custom path.
  * 
  * @returns { string } customPath if it is defined, otherwise default issues-path
  */

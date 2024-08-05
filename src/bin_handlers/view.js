@@ -1,3 +1,5 @@
+/** @import { ParseIssueDescriptionFunction, PrintIssueDescriptionFunction } from '../types/Plugin.js' */
+
 //Functions
 import printIssue from '#functions/printIssue.js'
 import plugins from '#functions/plugins.js'
@@ -5,11 +7,18 @@ import getIssueFromFile from '#functions/getIssueFromFile.js'
 
 import tell from '../../common/utils/tell.js';
 
+/**
+ * Print a description of an issue
+ * 
+ * @param { string } description - the description of the issue
+ * @param { ParseIssueDescriptionFunction[] } parsers - parsers to parse the description
+ * before printing it
+ */
 const printIssueDescription = (description, parsers) => {
     for(const parser of parsers) {
-        description = parser(description)
+        description = parser(description);
     }
-    tell(description)
+    tell(description);
 }
 
 export const command = 'view <selector>' //Currently only supports ID selector

@@ -1,3 +1,5 @@
+/** @import { PluginMetadata } from '../types/Plugin.js' */
+
 import * as fs from 'fs';
 import * as path from 'path';
 import url from 'url';
@@ -12,16 +14,14 @@ const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 const plugins_dir = path.join(__dirname, '../../plugins')
 
 /**
- * Checks if given object has the specified keys
- * **WARNING:** this returns and array or true (so a truthy value in both cases).
- * If you want to check if there are any missing keys, check if the type of the return
- * value is an object
+ * Retrieves the missing keys of an object
+
  * @param {object}   obj   object to check
- * @param {string[]} keys  keys to check
+ * @param {string[]} keys  keys to look for
  * 
- * @returns {string[] | true} an array with missing keys, true if all keys present
+ * @returns {string[] | false} an array with the `keys` that the `obj` doesn't have, false if none are missing
  */
-const hasKeys = (obj, keys) => {
+const getMissingKeys = (obj, keys) => {
     const missing_keys = []
     for (const key of keys) {
         if(!(key in obj)) {
@@ -29,9 +29,18 @@ const hasKeys = (obj, keys) => {
         }
     }
 
-    return missing_keys.length === 0 ? true : missing_keys
+    return missing_keys.length === 0 ? false : missing_keys
 }
 
+/**
+ * Parse a plugin's index.json file
+ * 
+ * @param { string } plugin_folder_path - Path to the plugin's folder
+ * 
+ * @throws if index.json file not found or if it's of invalid format
+ * 
+ * @returns { PluginMetadata }
+ */
 const parsePluginIndex = (plugin_folder_path) => {
 
     const index_json_path = path.join(plugin_folder_path, 'index.json')
@@ -54,9 +63,9 @@ const parsePluginIndex = (plugin_folder_path) => {
         'id'
     ]
     
-    const missing_keys = hasKeys(metadata, required_keys)
+    const missing_keys = getMissingKeys(metadata, required_keys)
 
-    if (typeof missing_keys === 'object') {
+    if (missing_keys) {
         throw new Error('The following properties are missing from ' + index_json_path + ': ' + missing_keys)
     }
 
@@ -65,8 +74,15 @@ const parsePluginIndex = (plugin_folder_path) => {
     return metadata
 }
 
-
+/**
+ * Class for managing plugins
+ */
 class PluginManager {
+    /**
+     * Object of all the plugins' metadata, with the keys being their IDs
+     * 
+     * @type { { [pluginId: string]: PluginMetadata } }
+     */
     plugins = {}
     functions = {
         parseIssueDescription: []

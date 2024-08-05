@@ -1,3 +1,5 @@
+/** @import { MinitaskConfig } from '../types/Config.js' */
+
 import * as path from 'path';
 import url from 'url';
 
@@ -14,13 +16,19 @@ import JSONValidator, { JSONSchemaEntryResponse } from './JSONValidator.js';
 const logger = new Logger(true, 'Log');
 
 /**
- * Get config from file
- * @returns 
+ * Find the config file and convert it to an object
+ * 
+ * @throws if file is not found or config schema
+ * 
+ * @returns { Promise<MinitaskConfig> } Pormise resolving to a MinitaskConfig object
+ * 
  */
 export default async function getConfigFromFile() {
 
-    const config_file_json = findFileUp('minitask.json', process.env.INIT_CWD, true, 5);
-    const config_file_js = findFileUp('minitask.js', process.env.INIT_CWD, false, 5);
+    const INIT_CWD = /** @type { string } */ (process.env.INIT_CWD);
+
+    const config_file_json = findFileUp('minitask.json', (INIT_CWD), true, 5);
+    const config_file_js = findFileUp('minitask.js', INIT_CWD, false, 5);
 
 
     let file_path;
@@ -47,15 +55,13 @@ export default async function getConfigFromFile() {
     //Validate config schema
     logger.log('Validating config schema')
 
-    const validator = new JSONValidator()
-
-    const validation_response = validator.validate(config, minitask_config_schema)
+    const validation_response = JSONValidator.validate(config, minitask_config_schema)
 
     //If validation failed, parse response and throw it
     if (validation_response !== JSONSchemaEntryResponse.SUCCESS) {
         let err_message = ''
-        const entry_name = validation_response.entry_name
-        switch (validation_response.response) {
+        const entry_name = validation_response[0].entry_name
+        switch (validation_response[0].response) {
             case JSONSchemaEntryResponse.REQUIRED: {
                 err_message = `${entry_name} is required`
                 break

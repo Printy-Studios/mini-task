@@ -1,3 +1,5 @@
+/** @import { Issue } from '../types/Issue' */
+
 //Core
 import * as fs from 'fs'
 import * as path from 'path'
@@ -16,11 +18,27 @@ const logger = new Logger(true, 'Log')
 
 export const command = 'new <name> [description]';
 
+export const describe = 'Create a new task';
+
+/**
+ * Convert a given string to its slug representation
+ * 
+ * @param { string } str - string to convert
+ * @returns { string } slugified string
+ */
 const slugify = (str) => {
     return str.replace(/\s+/g, '-').toLowerCase();
 }
 
-const saveIssueToFile = async (_path, issue) => {
+/**
+ * Save an issue to a file
+ * 
+ * @param { string } _path - Full path to folder where file should be saved 
+ * @param { Issue } issue - The issue object to parse and save.
+ * 
+ * @returns { void }
+ */
+const saveIssueToFile = (_path, issue) => {
 
     //String to be written to file
     let output_str = '---\n\n'
@@ -40,11 +58,6 @@ const saveIssueToFile = async (_path, issue) => {
 
     fs.writeFileSync(path.join(_path, issue.metadata.id + '.md'), output_str)
 }
-
-
-
-
-
 
 export const handler = async (argv) => {
     logger.log(argv, 'data')
