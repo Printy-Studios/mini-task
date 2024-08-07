@@ -1,4 +1,16 @@
-/** @import { PluginMetadata } from '../types/Plugin.js' */
+/** @import { 
+ *      PluginMetadata,
+ *      PluginFunctions,  
+ *      PluginConstants,
+ *      Plugin
+ * } from '../types/Plugin.js' 
+ * 
+ * @import {
+ *  MinitaskConfig,
+ MinitaskConfigPlugin
+ * } from '../types/Config.js'
+ * 
+ * */
 
 import * as fs from 'fs';
 import * as path from 'path';
@@ -84,12 +96,35 @@ class PluginManager {
      * @type { { [pluginId: string]: PluginMetadata } }
      */
     plugins = {}
+
+    /**
+     * Function extensions/overrides that are used in the app
+     * 
+     * @type { PluginFunctions }
+     */
     functions = {
         parseIssueDescription: []
     }
+
+    /**
+     * Constants overriden by plugins
+     * 
+     * @type { PluginConstants }
+     */
     constants = {}
+
+    /**
+     * Whether the functions have loaded
+     * 
+     * @type { boolean }
+     */
     functions_loaded = false
 
+    /**
+     * The config object of minitask
+     * 
+     * @type { MinitaskConfig }
+     */
     minitask_config
 
     /**
@@ -100,10 +135,38 @@ class PluginManager {
         
     }
 
-    async init(minitask_config) {
+    /**
+     * Parse plugin configuration in minitask config and determine whether it is enabled or not.
+     * @param { MinitaskConfigPlugin } plugin 
+     * @returns { boolean } True if enabled, false if not.
+     */
+    static isPluginEnabled = (plugin) => {
+        return (
+            (
+                typeof plugin === 'object' &&
+                plugin.enabled
+            ) ||
+            (
+                typeof plugin === 'boolean' &&
+                plugin === true
+            )
+        )
+    }
+
+    /**
+     * Initialize the class. And parse plugins' configuration and store them in 
+     * `this.plugins` 
+     * 
+     * @param { MinitaskConfig } minitask_config 
+     * 
+     * @throws if there's an id clash between plugins
+     * 
+     * @returns { void }
+     */
+    init(minitask_config) {
         logger.log('Constructing a PluginManager instance')
         if(!minitask_config) {
-            this.minitask_config = config;
+            throw new Error("Minitask config object hasn't been provided");
         }
 
         if (!this.minitask_config.plugins) {
@@ -113,24 +176,11 @@ class PluginManager {
 
         const plugin_folder_names = fs.readdirSync(plugins_dir)
 
-        const isPluginEnabled = (plugin) => {
-            return (
-                (
-                    typeof plugin === 'object' &&
-                    plugin.enabled
-                ) ||
-                (
-                    typeof plugin === 'boolean' &&
-                    plugin === true
-                )
-            )
-        }
-
         //Add plugin metadata from plugins folder for plugins that are enabled
         for (const plugin_id in this.minitask_config.plugins) {
             if (
                 plugin_folder_names.includes(plugin_id) &&
-                isPluginEnabled(this.minitask_config.plugins[plugin_id])
+                PluginManager.isPluginEnabled(this.minitask_config.plugins[plugin_id])
             ) {
                 const metadata = parsePluginIndex(path.join(plugins_dir, plugin_id))
                 if((metadata.id in this.plugins)) {
@@ -159,23 +209,22 @@ class PluginManager {
 
     /**
      * Load exports from a plugin's module onto the passed variable
-     * @param { Plugin }    plugin      exports from plugin such as 'functions' or 'constants'
+     * @param { Plugin }    plugin_exports      exports from plugin such as 'functions' or 'constants'
      * @param { object }    loadonto    object in which to store the exports, such as 
      * this.functions | this.constants | etc.
      * 
-     * @returns { null | _exports } null or list of exports that were missing if there were any.
+     * @returns { void }
      * Throws error if there are conficts with existing loaded exports
      */
     loadPluginModuleExports = (plugin_exports, loadonto) => {
         for(const export_name in plugin_exports) {
             if (Array.isArray(loadonto[export_name])) {
-                loadonto[export_name].push(plugin_exports[export_name])
+                loadonto[export_name].push(...plugin_exports[export_name])
             }
             else if (loadonto[export_name]) {
                 throw new Error('Clash between plugin exports ' + export_name)
             } else {
                 loadonto[export_name] = plugin_exports[export_name]
-                //Object.assign(loadonto, { [export_name]: plugin_exports[export_name] })
             }
         }
 
@@ -185,6 +234,8 @@ class PluginManager {
     /**
      * Load modules for plugins that are enabled. Additionally set the configuration
      * for plugins as defined in minitask.json
+     * 
+     * @returns { Promise<void> }
      */
     loadModules = async () => {
         logger.log('Loading plugin modules')
@@ -202,7 +253,7 @@ class PluginManager {
             ) {
                 let plugin_module
                 try {
-                    plugin_module = await import(url.pathToFileURL(path.join(current_plugin.plugin_path, 'index.js')))
+                    plugin_module = await import(url.pathToFileURL(path.join(current_plugin.plugin_path, 'index.js')).href)
                 } catch (err) {
                     throw new Error('An error occured while loading plugin ' + current_plugin.id + ': ' + err)
                 }

@@ -1,3 +1,5 @@
+/** @import { MinitaskConfig } from '../types/Config' */
+
 // Core
 import yargs from 'yargs'
 import { hideBin } from 'yargs/helpers';
@@ -13,7 +15,7 @@ import commands from '#bin_handlers/index.js';
 
 // Initialize plugins
 await loadConfig();
-await plugins.init();
+await plugins.init(/** @type { MinitaskConfig } */(config));
 await plugins.loadModules();
 
 

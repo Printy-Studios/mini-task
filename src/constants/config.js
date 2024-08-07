@@ -1,5 +1,12 @@
+/** @import { MinitaskConfig } from '../types/Config' */
+
 import getConfigFromFile from '#functions/getConfigFromFile.js';
 
+/**
+ * Minitask configuration object 
+ * 
+ * @type { MinitaskConfig | {} }
+ */
 let config = {};
 
 /**
