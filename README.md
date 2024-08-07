@@ -28,7 +28,7 @@ npm i -g mini-task
 npm i mini-task
 ```
 
-Next, you have to create a new mini-task project. This can be done by running `minitask init` or by creating a `minitask.json` file and populating it with options (see [minitask.json]() for list of options).
+Next, you have to create a new mini-task project. This can be done by running `minitask init` or by creating a `minitask.js` file and populating it with options (see [minitask-config](./docs/minitask-config.md) for list of options).
 
 `minitask init` will run you through an interactive questionnaire to help you set up your project. If you want to skip the questionnaire and just initialize a project with the default settings, run `minitask init -y`.
 
