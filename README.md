@@ -7,6 +7,8 @@ provide a way for small teams to manage their issues easily, without having to l
  - **File based** - all issues are stored as human-readable markdown files and
  can be edited/viewed without the CLI
  - **CLI** - the CLI can be used to quickly browse tasks, view, edit, create, delete them.
+ - **Offline support** - since all the tasks are stored on your computer as readable files,
+ you can view and manage them even while offline.
  - **Lightweight** - mini-task was intended to be light and fast from the very start.
  It offers only the basic functions needed to manage issues. But if you want something more...
  - **...Extensible** - to counter its simplicity, mini-task is designed to be vastly
