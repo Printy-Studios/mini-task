@@ -28,7 +28,7 @@ npm i -g mini-task
 npm i mini-task
 ```
 
-Next, you have to create a new mini-task project. This can be done by running `minitask init` or by creating a `minitask.js` file and populating it with options (see [minitask-config](./docs/minitask-config.md) for list of options).
+Next, you have to create a new mini-task project. This can be done by running `minitask init` or by creating a `minitask.js` file and populating it with options (see [config.md](./docs/config.md) for list of options).
 
 `minitask init` will run you through an interactive questionnaire to help you set up your project. If you want to skip the questionnaire and just initialize a project with the default settings, run `minitask init -y`.
 
@@ -38,44 +38,31 @@ Now you have your mini-task project set up, you can start creating issues. See t
 
 mini-task has two ways how you can use it - with an interactive CLI or through direct commands. If you want to use the interactive CLI, simply run `minitask`, otherwise see the [Commands section](#commands) to see how to run individual commands.
 
-mini-task uses [marked-terminal](https://www.npmjs.com/package/marked-terminal) for rendering the markdown of the issue descriptions. You can alter the style of the rendered markdown through user settings by using `minitask settings` or editing the `minitask-user.json` file.
+mini-task uses [marked-terminal](https://www.npmjs.com/package/marked-terminal) for rendering the markdown of the issue descriptions. The rendering logic comes as a plugin that is installed by default. You can alter the style of the rendered markdown through user settings by using `minitask settings` or editing the configuration file. If you would like to write your own renderer/parser, please refer to [plugins.md](./docs/plugins.md)
 
 ## Commands
 
 `minitask` - Run the interactive CLI.
 
-`minitask init --y` - Initialize a new mini-task project by answering a few questions. `--y` to skip the questions and initialize with default settings.
+`minitask init -y` - Initialize a new mini-task project by answering a few questions. `-y` to skip the questions and initialize with default settings.
 
 `minitask new [name] --description|d|desc --status|s --priority|p --tags|-t --id --assignee` -
-Create a new issue. If no name is specified, an interactive issue creator is opened, otherwise
-a new issue is created automatically from provided args.
+Create a new issue.
 
 `minitask edit [id|name|description] --name --description --status --priority --tags --id --assignee` - 
-Edit an existing issue, selecting by either `id`, `name` or `description`. If multiple
-issues match the selector, an interface appears where you can select the specific issue.
-If you pass any of the optional flags, the issue will be directly updated, otherwise
-an interactive editor will be opened.
+Edit an existing issue, selecting by either `id`, `name` or `description`. Using `id` or `name` will do an exclusive search (selector must match exactly) , while using `description` will use an inclusive search (selector must match only part of text)
 
-`minitask delete [id|name|description]` - Delete an existing issue, selecting by
-either `id`, `name` or `description`. If multiple issues match the selector, an 
-interface appears where you can select the specific issue.
+`minitask delete [id|name|description] -all` - Delete an existing issue, selecting by either `id`, `name` or `description`.  Using `id` or `name` will do an exclusive search (selector must match exactly) , while using `description` will use an inclusive search (selector must match only part of text). If multiple issue are found, the action is cancelled unless the `-all` flag has been specified.
 
-`minitask list [preset-name] --ni --status --priority --tags --id --name --description --assignee --sortby --sortorder` - List
-issues with the ability to filter and sort. It's possible to create filter/sort presets and default filters/sort in `minitask.json`.
+`minitask list [preset-name] --status --priority --tags --id --name --description --assignee --sortby --sortorder` - List issues with the ability to filter and sort. It's possible to create filter/sort presets and default filters/sort in `minitask.js`.
 
-  - `--ni` - don't run command in interactive mode.
-
-`minitask view [id|name|description]` - View issue, selecting by either `id`, `name` or `description`. If multiple issues match the selector, and interface appears where you can select the specific issue.
-
-`minitask settings --e` - Interactively view and edit user settings.
-
-  - `--e` - Open the user settings file (`minitask-user.json`) in default text editor instead of interactive CLI.
+`minitask view [id|name|description]` - View issue, selecting by either `id`, `name` or `description`.
 
 ## File-based storage
 
-All issues are stored as Markdown files. This allows an issue to be easily viewed/edited/created without the need for the CLI. Most of the issue's data is stored as [front matter](https://daily-dev-tips.com/posts/what-exactly-is-frontmatter/?utm_content=cmp-true), except for the title and description. A typical issue file will look something like this:
+All issues are stored as Markdown files. This allows an issue to be easily viewed/edited/created without the need for the CLI. The issue's metadata is stored as [front matter](https://daily-dev-tips.com/posts/what-exactly-is-frontmatter/?utm_content=cmp-true), except for the title and description. A typical issue file will look something like this:
 
-```
+```md
 ---
 
 status: 'doing'
@@ -111,9 +98,9 @@ mini-task can be extended to support other file formats as well!
 
 ## mini-task.json|js
 
-The `mini-task.json|js` file specifies the project scoped settings.
+The `minitask.js` file specifies the project scoped settings.
 
-A typical `mini-task.json` file looks like this
+A typical configuration looks like this:
 
 ```
 {
@@ -157,10 +144,6 @@ A typical `mini-task.json` file looks like this
     }
 }
 ```
-
-It's also possible to have a `minitask.js` instead of `minitask.json`. This is
-useful if you want to configure such settings that require a function or a call
-to a function, for example when setting colors with [chalk](#TODO)
 
 ### Properties
 
