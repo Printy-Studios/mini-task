@@ -169,7 +169,7 @@ class PluginManager {
             throw new Error("Minitask config object hasn't been provided");
         }
 
-        if (!this.minitask_config.plugins) {
+        if (!this.minitask_config?.plugins) {
             logger.log('No plugins specified in minitask.json, skipping plugin manager initialization')
             return
         }
