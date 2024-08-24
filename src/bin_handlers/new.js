@@ -80,6 +80,7 @@ export const handler = async (argv) => {
         return
     }
 
+    // If there is a custom save function from a plugin, use it instead.
     if (plugins.functions.saveIssueToFile) {
         plugins.functions.saveIssueToFile(config['issues-path'], new_issue)
     } else {
