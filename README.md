@@ -46,7 +46,7 @@ mini-task uses [marked-terminal](https://www.npmjs.com/package/marked-terminal) 
 
 `minitask init -y` - Initialize a new mini-task project by answering a few questions. `-y` to skip the questions and initialize with default settings.
 
-`minitask new [name] --description|d|desc --status|s --priority|p --tags|-t --id --assignee` -
+`minitask new [name] <description> --status|s --priority|p --tags|-t --id --assignee` -
 Create a new issue.
 
 `minitask edit [id|name|description] --name --description --status --priority --tags --id --assignee` - 
