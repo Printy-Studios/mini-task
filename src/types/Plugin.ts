@@ -2,7 +2,7 @@ import { Issue } from './Issue'
 
 export type SaveIssueToFileFunction = (path: string, issue: Issue) => Promise<void>
 export type ParseIssueDescriptionFunction = (description: string) => string
-export type PrintIssueDescriptionFunction = (description?: string, parsers?: ParseIssueDescriptionFunction[]) => void
+export type PrintIssueDescriptionFunction = (description: string, parsers?: ParseIssueDescriptionFunction[]) => void
 export type setConfigFunction = (config: any) => void
 
 export type PluginFunctions = {
@@ -41,5 +41,5 @@ export type IssueRenderers = {
 }
 
 export type IssueParsers = {
-    description: ParseIssueDescriptionFunction[]
+    description?: ParseIssueDescriptionFunction[]
 }

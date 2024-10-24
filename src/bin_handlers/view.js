@@ -1,4 +1,4 @@
-/** @import { ParseIssueDescriptionFunction, PrintIssueDescriptionFunction } from '../types/Plugin.js' */
+/** @import { IssueParsers, IssueRenderers, ParseIssueDescriptionFunction, PrintIssueDescriptionFunction } from '../types/Plugin.js' */
 
 //Functions
 import printIssue from '#functions/printIssue.js'
@@ -14,7 +14,7 @@ import tell from '../../common/utils/tell.js';
  * @param { ParseIssueDescriptionFunction[] } parsers - parsers to parse the description
  * before printing it
  */
-const printIssueDescription = (description, parsers) => {
+const printIssueDescription = (description, parsers = []) => {
     for(const parser of parsers) {
         description = parser(description);
     }
@@ -31,6 +31,9 @@ export const handler = async (argv) => {
 
     const issue = await getIssueFromFile(argv.selector + issue_file_ext) //Update to be able to use selectors other than ID
 
+    /**
+     * @type { IssueRenderers }
+     */
     const renderers = {
         description: printIssueDescription
     }
@@ -39,6 +42,9 @@ export const handler = async (argv) => {
         renderers.description = plugins.functions.printIssueDescription
     }
 
+    /**
+     * @type { IssueParsers }
+     */
     const parsers = {
         description: plugins.functions.parseIssueDescription
     }

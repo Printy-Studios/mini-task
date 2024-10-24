@@ -85,5 +85,5 @@ export default function printIssue(issue, renderers, parsers) {
     printIssueStatus(issue.metadata.status)
     printIssuePriority(issue.metadata.priority)
     tell('')
-    renderers.description(issue.description, parsers.description)
+    renderers.description(issue.description || "", parsers.description)
 }
